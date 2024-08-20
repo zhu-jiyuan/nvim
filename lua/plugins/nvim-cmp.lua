@@ -104,7 +104,7 @@ return {
 							fallback()
 						end
 					end, { "i", "s" }),
-					["<C-Space>"] = cmp.mapping(function(fallback)
+					["<C-y>"] = cmp.mapping(function(fallback)
 						if copilot_suggestion.is_visible() then
 							copilot_suggestion.accept()
 						else
