@@ -29,11 +29,6 @@ return {
             border = custom.border,
         }
 
-        local lazygit = require("toggleterm.terminal").Terminal:new {
-            cmd = "lazygit",
-            hidden = true,
-            direction = "float", float_opts = float_opts,
-        }
         local yazi = require("toggleterm.terminal").Terminal:new {
             cmd = "yazi",
             hidden = true,
@@ -57,13 +52,6 @@ return {
             },
 
             -- External programs
-            {
-                "<leader>gl",
-                function()
-                    lazygit:toggle()
-                end,
-                desc = "LazyGit",
-            },
             {
                 "<leader>gy",
                 function()

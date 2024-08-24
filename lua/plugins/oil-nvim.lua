@@ -69,6 +69,7 @@ return {
                     ["<C-t>"] = "actions.select_tab",
                     ["<C-p>"] = "actions.preview",
                     ["<C-c>"] = "actions.close",
+                    ['<BS>'] = 'actions.parent',
                     ["<C-l>"] = false,
                     ["<C-j>"] = false,
                     ["<C-k>"] = false,
