@@ -10,6 +10,7 @@ local server_list = {
     jsonls = {},
     gopls = {},
     clangd = {},
+    csharp_ls = {},
 }
 
 local on_attach = function(_, bufnr)
@@ -44,8 +45,7 @@ local on_attach = function(_, bufnr)
     nmap("<leader>D", fzf_lua.lsp_typedefs, "Type [D]efinition")
     nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
     nmap("<leader>ws", fzf_lua.lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
-
-    -- See `:help K` for why this keymap
+-- See `:help K` for why this keymap
     -- nmap("K", function()
     -- 	vim.lsp.buf.hover()
     -- end, "Hover Documentation")
