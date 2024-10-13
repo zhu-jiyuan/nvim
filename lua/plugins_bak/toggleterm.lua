@@ -3,7 +3,8 @@ local custom = require "custom"
 
 return {
     "akinsho/toggleterm.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    cmd = {"ToggleTerm"},
     version = '*',
     opts = {
         size = function(term)

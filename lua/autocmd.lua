@@ -29,3 +29,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         end, 150)
     end,
 })
+
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  callback = function()
+    vim.cmd([[Trouble qflist open]])
+  end,
+})
+

@@ -24,10 +24,10 @@ return {
         config = function()
             -- calling `setup` is optional for customization
             require("fzf-lua").setup({
-                winopts = {
-                    preview = { default = 'bat_native' }
-                },
-                fzf_colors = true,
+                -- winopts = {
+                --     preview = { default = 'bat_native' }
+                -- },
+                -- fzf_colors = true,
                 previewers = {
                     bat = {
                         cmd = "bat",

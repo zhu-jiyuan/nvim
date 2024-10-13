@@ -19,6 +19,7 @@ return {
                         return
                     end
                     return {
+                        async = true,
                         timeout_ms = 500,
                         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
                     }

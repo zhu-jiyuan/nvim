@@ -1,17 +1,6 @@
 local custom = require("custom")
 
-local server_list = {
-    lua_ls = {
-        settings = {
-            lua = {},
-        },
-    },
-    pyright = {},
-    jsonls = {},
-    gopls = {},
-    clangd = {},
-    csharp_ls = {},
-}
+local server_list = require("lsp_setting")
 
 local on_attach = function(_, bufnr)
     -- NOTE: Remember that lua is a real programming language, and as such it is possible

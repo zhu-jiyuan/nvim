@@ -101,7 +101,7 @@ option.termguicolors = true
 
 -- 样式
 
---opt.background = "dark"
+option.background = "light"
 --opt.termguicolors = true
 --opt.termguicolors = true
 
