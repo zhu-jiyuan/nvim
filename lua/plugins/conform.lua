@@ -13,14 +13,15 @@ return {
                     python = { "isort", "black" },
                     -- Use a sub-list to run only the first available formatter
                     javascript = { { "prettierd", "prettier" } },
+                    ["*"] = { "codespell" },
                 },
                 format_on_save = function(bufnr)
                     if disable_filetypes[vim.bo[bufnr].filetype] then
                         return
                     end
                     return {
-                        async = true,
-                        timeout_ms = 500,
+                        -- async = true,
+                        timeout_ms = 100,
                         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
                     }
                 end,

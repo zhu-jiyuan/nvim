@@ -8,7 +8,6 @@ M.option = option
 M.buffer = buffer
 M.global = global
 
-
 -- 文件编码格式
 
 option.encoding = "UTF-8"
@@ -59,7 +58,7 @@ option.shiftwidth = 4
 
 -- 空格替代
 
-option.expandtab = true
+-- option.expandtab = true
 
 -- 新行对齐当前行
 
@@ -101,7 +100,7 @@ option.termguicolors = true
 
 -- 样式
 
-option.background = "light"
+-- option.background = "light"
 --opt.termguicolors = true
 --opt.termguicolors = true
 
