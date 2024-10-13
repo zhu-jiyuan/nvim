@@ -4,12 +4,16 @@ return {
         event = "BufReadPre",
         config = function()
             require("gitsigns").setup({
-                current_line_blame = true,
+                -- current_line_blame = true,
             })
         end,
     },
     {
         "sindrets/diffview.nvim",
         cmd = "DiffviewOpen",
-    }
+    },
+	{
+		"tpope/vim-fugitive",
+		cmd = "Git",
+	}
 }
