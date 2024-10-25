@@ -1,4 +1,3 @@
-
 -- 添加lua搜索路径
 
 --local home = os.getenv("HOME")
