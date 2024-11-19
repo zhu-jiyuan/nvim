@@ -30,7 +30,14 @@ return {
 			{ "<leader>go", ":Neogit cwd=%:p:h<CR>",               desc = "Uses the repository of the current file" },
 			{ "<leader>gc", ":Neogit commit<CR>",                  desc = "Uses the repository of the current file" },
 			{ "<leader>gs", ":Neogit cwd=%:p:h kind=floating<CR>", desc = "Uses the repository of the current file" },
+			{ "<leader>gg", ":Neogit<CR>",                         desc = "Uses the repository of the current file" },
 		},
-		config = true,
+		config = function()
+			local neogit = require "neogit"
+			neogit.setup({
+				auto_show_console = false,
+				disable_commit_confirmation = true,
+			})
+		end,
 	}
 }
