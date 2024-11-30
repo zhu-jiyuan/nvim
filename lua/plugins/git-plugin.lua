@@ -37,6 +37,7 @@ return {
 			neogit.setup({
 				auto_show_console = false,
 				disable_commit_confirmation = true,
+				console_timeout = 10000,
 			})
 		end,
 	}
