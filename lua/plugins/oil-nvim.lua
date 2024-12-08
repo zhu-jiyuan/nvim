@@ -53,13 +53,13 @@ return {
 						end
 					end,
 				},
-				view_options = {
-					show_hidden = true,
-					is_always_hidden = function(name)
-						return name == '..'
-					end,
-				},
 
+			},
+			view_options = {
+				show_hidden = true,
+				is_always_hidden = function(name)
+					return name == '..'
+				end,
 			},
 
 		},
