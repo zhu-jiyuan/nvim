@@ -35,6 +35,10 @@ map("n", "<F5>", Runcode.runcode, opt)
 -- change window wrap
 map("n", "<M-z>", Helper.change_window_wrap, opt)
 
+-- set quickfix next/prev
+map("n", "[q", ":prev<CR>", opt)
+map("n", "]q", ":cnext<CR>", opt)
+
 
 -- telescope
 -- see plugins/telescope.lua

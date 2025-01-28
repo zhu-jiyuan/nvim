@@ -10,4 +10,5 @@ return {
 	clangd = {},
 	csharp_ls = {},
 	ts_ls = {},
+	rust_analyzer = {},
 }

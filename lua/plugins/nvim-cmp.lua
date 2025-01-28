@@ -72,13 +72,13 @@ return {
 				},
 				window = {
 					completion = cmp.config.window.bordered(),
-					-- documentation = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior, count = 1 }),
-					["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior, count = 1 }),
+					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior, count = 1 }),
+					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior, count = 1 }),
 					["<C-c>"] = function()
 						luasnip.unlink_current()
 						cmp.mapping.close()

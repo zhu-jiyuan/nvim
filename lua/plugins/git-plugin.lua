@@ -10,7 +10,7 @@ return {
 	},
 	{
 		"sindrets/diffview.nvim",
-		cmd = "DiffviewOpen",
+		cmd = {"DiffviewOpen", "Neogit"},
 	},
 	{
 		"tpope/vim-fugitive",
