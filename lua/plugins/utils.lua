@@ -30,9 +30,38 @@ return {
 	{
 		"folke/persistence.nvim",
 		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		cmd = "RestoreSession",
 		opts = {
 			-- add any custom options here
 			--
+		},
+		init = function()
+			vim.api.nvim_create_user_command("RestoreSession", function()
+				require("persistence").load()
+			end, {})
+		end,
+		keys = {
+			{
+				"<leader>qs",
+				function()
+					require("persistence").load()
+				end,
+				desc = "Restore Session",
+			},
+			{
+				"<leader>ql",
+				function()
+					require("persistence").load({ last = true })
+				end,
+				desc = "Restore Last Session",
+			},
+			{
+				"<leader>qd",
+				function()
+					require("persistence").stop()
+				end,
+				desc = "Don't Save Current Session",
+			},
 		},
 	},
 	{
@@ -126,14 +155,59 @@ return {
 			},
 		},
 	},
+    {
+        "jake-stewart/multicursor.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        -- stylua: ignore
+        config = function()
+            local mc = require("multicursor-nvim")
+            local map = vim.keymap.set
+            mc.setup()
+
+            map({ "n", "v" }, "<C-M-j>", function() mc.lineAddCursor(1) end)
+            map({ "n", "v" }, "<C-M-k>", function() mc.lineAddCursor(-1) end)
+            map({ "n", "v" }, "<C-M-n>", function() mc.matchAddCursor(1) end)
+            map({ "n", "v" }, "<C-M-p>", function() mc.matchAddCursor(-1) end)
+            map({ "n", "v" }, "<C-x>",   mc.deleteCursor)
+            map("n", "<C-M-i>",          mc.alignCursors)
+            map("n", "<C-M-leftmouse>",  mc.handleMouse)
+            map("n", "<Esc>", function()
+                if not mc.cursorsEnabled() then
+                    mc.enableCursors()
+                elseif mc.hasCursors() then
+                    mc.clearCursors()
+                else -- fallback to clear highlights
+                    vim.cmd("noh")
+                    vim.lsp.buf.clear_references()
+                end
+            end)
+        end,
+    },
+    -- {
+    --     "nosduco/remote-sshfs.nvim",
+    --     dependencies = "nvim-telescope/telescope.nvim",
+    --     cmd = { "RemoteSSHFSConnect" },
+    --     opts = {},
+    -- },
+
 
 	-- install without yarn or npm
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function() vim.fn["mkdp#util#install"]() end,
-	}
+	-- web markdown preview.
+	-- {
+	-- 	"iamcco/markdown-preview.nvim",
+	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+	-- 	ft = { "markdown" },
+	-- 	build = function() vim.fn["mkdp#util#install"]() end,
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>mp",
+	-- 			ft = "markdown",
+	-- 			"<cmd>MarkdownPreviewToggle<cr>",
+	-- 			desc = "Markdown Preview",
+	-- 		},
+	-- 	},
+	-- }
+
 	-- nvim 0.10 is support this plugin.
 	-- {
 	--     'numToStr/Comment.nvim',
