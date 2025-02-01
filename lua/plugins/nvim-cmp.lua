@@ -79,6 +79,7 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior, count = 1 }),
 					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior, count = 1 }),
+					["<C-x>"] = cmp.mapping.close(),
 					["<C-c>"] = function()
 						luasnip.unlink_current()
 						cmp.mapping.close()
