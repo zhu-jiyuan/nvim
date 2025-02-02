@@ -134,6 +134,8 @@ global.maplocalleader = " "
 -- vimgrep
 global.grepprg = "rg --vimgrep --smart-case"
 global.grepformat = "%f:%l:%c:%m"
+-- 将 grep 替换为静默模式
+vim.api.nvim_command('cnoreabbrev <expr> grep (getcmdtype() == ":" && getcmdline() =~# "^grep") ? "silent grep" : "grep"')
 
 option.guicursor = {
   'n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100',
