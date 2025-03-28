@@ -155,7 +155,7 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = vim.tbl_keys(server_list),
 			})
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			for server, server_config in pairs(server_list) do
 				require("lspconfig")[server].setup(vim.tbl_deep_extend("keep", {
