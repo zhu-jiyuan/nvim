@@ -169,7 +169,7 @@ return {
             map({ "n", "v" }, "<C-M-k>", function() mc.lineAddCursor(-1) end)
             map({ "n", "v" }, "<C-M-n>", function() mc.matchAddCursor(1) end)
             map({ "n", "v" }, "<C-M-p>", function() mc.matchAddCursor(-1) end)
-            map({ "n", "v" }, "<C-x>",   mc.deleteCursor)
+            map({ "n", "v" }, "<C-M-x>", mc.deleteCursor)
             map("n", "<C-M-i>",          mc.alignCursors)
             map("n", "<C-M-leftmouse>",  mc.handleMouse)
             map("n", "<Esc>", function()

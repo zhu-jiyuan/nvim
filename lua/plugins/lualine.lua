@@ -51,7 +51,7 @@ local function get_lsp_text()
 end
 
 local function get_copilot()
-	local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+	local client = vim.lsp.get_clients({ name = "copilot" })[1]
 	if not client then
 		return " "
 	end
