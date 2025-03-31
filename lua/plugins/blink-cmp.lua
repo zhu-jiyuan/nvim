@@ -5,9 +5,13 @@ return {
 		dependencies = {
 			'rafamadriz/friendly-snippets',
 			{
-				"L3MON4D3/LuaSnip",
-				build = "make install_jsregexp"
-			},
+				'L3MON4D3/LuaSnip',
+				dependencies = { "rafamadriz/friendly-snippets" },
+				version = 'v2.*',
+				config = function ()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end
+			}
 		},
 
 		-- use a release tag to download pre-built binaries
@@ -53,10 +57,19 @@ return {
 					auto_show_delay_ms = 500,
 				},
 				accept = { auto_brackets = { enabled = true } },
+				list = {
+					selection = {
+						preselect = true,
+						auto_insert = false,
+					},
+				},
 			},
 
 			-- snippets
 			snippets = { preset = 'luasnip' },
+			cmdline = {
+				enabled = true,
+			},
 
 
 			-- Default list of enabled providers defined so that you can extend it
