@@ -5,10 +5,23 @@ return {
 		},
 	},
 	pyright = {},
-	jsonls = {},
 	gopls = {},
 	clangd = {},
-	csharp_ls = {},
+	-- csharp_ls = {},
 	ts_ls = {},
 	rust_analyzer = {},
+
+	-- web dev
+	eslint = {},
+	cssls = {},
+	html = {},
+
+	sqlls = {},
+
+	--config
+	yamlls = {},
+	jsonls = {},
+
+
+
 }

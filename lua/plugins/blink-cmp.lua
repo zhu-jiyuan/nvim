@@ -2,7 +2,13 @@ return {
 	{
 		'saghen/blink.cmp',
 		-- optional: provides snippets for the snippet source
-		dependencies = { 'rafamadriz/friendly-snippets' },
+		dependencies = {
+			'rafamadriz/friendly-snippets',
+			{
+				"L3MON4D3/LuaSnip",
+				build = "make install_jsregexp"
+			},
+		},
 
 		-- use a release tag to download pre-built binaries
 		version = '1.*',
@@ -27,8 +33,12 @@ return {
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
 			keymap = {
-				preset = 'super-tab',
+				preset = 'enter',
+
+				['<C-s>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
+				['<C-/>'] = { 'show', 'show_documentation', 'hide_documentation' },
 			},
+			signature = { enabled = true },
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -37,12 +47,22 @@ return {
 			},
 
 			-- (Default) Only show the documentation popup when manually triggered
-			completion = { documentation = { auto_show = false } },
+			completion = {
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 500,
+				},
+				accept = { auto_brackets = { enabled = true } },
+			},
+
+			-- snippets
+			snippets = { preset = 'luasnip' },
+
 
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { 'lsp', 'buffer', 'snippets', 'path' },
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

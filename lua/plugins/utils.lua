@@ -12,6 +12,31 @@ return {
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
+	{
+		"windwp/nvim-ts-autotag",
+
+		event = "BufReadPre",
+		config = function()
+			require('nvim-ts-autotag').setup({
+				opts = {
+
+					enable_close = false, -- Auto close tags
+					enable_rename = true, -- Auto rename pairs of tags
+					enable_close_on_slash = true -- Auto close on trailing </
+				},
+				-- Also override individual filetype configs, these take priority.
+				-- Empty by default, useful if one of the "opts" global settings
+				-- doesn't work well in a specific filetype
+				--[[ per_filetype = {
+            ["html"] = {
+              enable_close = false
+            }
+          } ]]
+
+			})
+		end
+
+	},
 	-- tip key
 	{
 		"folke/which-key.nvim",
@@ -156,40 +181,40 @@ return {
 			},
 		},
 	},
-    {
-        "jake-stewart/multicursor.nvim",
-        event = { "BufReadPost", "BufNewFile" },
-        -- stylua: ignore
-        config = function()
-            local mc = require("multicursor-nvim")
-            local map = vim.keymap.set
-            mc.setup()
+	{
+		"jake-stewart/multicursor.nvim",
+		event = { "BufReadPost", "BufNewFile" },
+		-- stylua: ignore
+		config = function()
+			local mc = require("multicursor-nvim")
+			local map = vim.keymap.set
+			mc.setup()
 
-            map({ "n", "v" }, "<C-M-j>", function() mc.lineAddCursor(1) end)
-            map({ "n", "v" }, "<C-M-k>", function() mc.lineAddCursor(-1) end)
-            map({ "n", "v" }, "<C-M-n>", function() mc.matchAddCursor(1) end)
-            map({ "n", "v" }, "<C-M-p>", function() mc.matchAddCursor(-1) end)
-            map({ "n", "v" }, "<C-M-x>", mc.deleteCursor)
-            map("n", "<C-M-i>",          mc.alignCursors)
-            map("n", "<C-M-leftmouse>",  mc.handleMouse)
-            map("n", "<Esc>", function()
-                if not mc.cursorsEnabled() then
-                    mc.enableCursors()
-                elseif mc.hasCursors() then
-                    mc.clearCursors()
-                else -- fallback to clear highlights
-                    vim.cmd("noh")
-                    vim.lsp.buf.clear_references()
-                end
-            end)
-        end,
-    },
-    -- {
-    --     "nosduco/remote-sshfs.nvim",
-    --     dependencies = "nvim-telescope/telescope.nvim",
-    --     cmd = { "RemoteSSHFSConnect" },
-    --     opts = {},
-    -- },
+			map({ "n", "v" }, "<C-M-j>", function() mc.lineAddCursor(1) end)
+			map({ "n", "v" }, "<C-M-k>", function() mc.lineAddCursor(-1) end)
+			map({ "n", "v" }, "<C-M-n>", function() mc.matchAddCursor(1) end)
+			map({ "n", "v" }, "<C-M-p>", function() mc.matchAddCursor(-1) end)
+			map({ "n", "v" }, "<C-M-x>", mc.deleteCursor)
+			map("n", "<C-M-i>", mc.alignCursors)
+			map("n", "<C-M-leftmouse>", mc.handleMouse)
+			map("n", "<Esc>", function()
+				if not mc.cursorsEnabled() then
+					mc.enableCursors()
+				elseif mc.hasCursors() then
+					mc.clearCursors()
+				else -- fallback to clear highlights
+					vim.cmd("noh")
+					vim.lsp.buf.clear_references()
+				end
+			end)
+		end,
+	},
+	-- {
+	--     "nosduco/remote-sshfs.nvim",
+	--     dependencies = "nvim-telescope/telescope.nvim",
+	--     cmd = { "RemoteSSHFSConnect" },
+	--     opts = {},
+	-- },
 
 
 	-- install without yarn or npm
