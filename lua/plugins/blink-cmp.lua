@@ -8,7 +8,7 @@ return {
 				'L3MON4D3/LuaSnip',
 				dependencies = { "rafamadriz/friendly-snippets" },
 				version = 'v2.*',
-				config = function ()
+				config = function()
 					require("luasnip.loaders.from_vscode").lazy_load()
 				end
 			}
@@ -62,6 +62,15 @@ return {
 						preselect = true,
 						auto_insert = false,
 					},
+				},
+				menu = {
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind", gap = 1 },
+							-- { "source_name", gap = 1 }
+						},
+					}
 				},
 			},
 
