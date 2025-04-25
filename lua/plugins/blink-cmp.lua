@@ -10,6 +10,7 @@ return {
 				version = 'v2.*',
 				config = function()
 					require("luasnip.loaders.from_vscode").lazy_load()
+					require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
 				end
 			}
 		},
@@ -40,7 +41,7 @@ return {
 				preset = 'enter',
 
 				['<C-s>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
-				['<C-/>'] = { 'show', 'show_documentation', 'hide_documentation' },
+				['<C-Enter>'] = { 'show', 'show_documentation', 'hide_documentation' },
 			},
 			signature = { enabled = true },
 
@@ -66,8 +67,8 @@ return {
 				menu = {
 					draw = {
 						columns = {
-							{ "label", "label_description", gap = 1 },
-							{ "kind_icon", "kind", gap = 1 },
+							{ "label",     "label_description", gap = 1 },
+							{ "kind_icon", "kind",              gap = 1 },
 							-- { "source_name", gap = 1 }
 						},
 					}
@@ -78,6 +79,22 @@ return {
 			snippets = { preset = 'luasnip' },
 			cmdline = {
 				enabled = true,
+				keymap = {
+					-- recommended, as the default keymap will only show and select the next item
+					['<Tab>'] = { 'show', 'accept' },
+					['<CR'] = {'accept_and_enter', 'fallback'}
+				},
+
+				completion = {
+					menu = {
+						auto_show = function(ctx)
+							return vim.fn.getcmdtype() == ':'
+
+							-- enable for inputs as well, with:
+							-- or vim.fn.getcmdtype() == '@'
+						end,
+					},
+				}
 			},
 
 

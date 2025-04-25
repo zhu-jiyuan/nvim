@@ -153,7 +153,7 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = vim.tbl_keys(server_list),
+				-- ensure_installed = vim.tbl_keys(server_list),
 			})
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
