@@ -79,11 +79,14 @@ return {
 			snippets = { preset = 'luasnip' },
 			cmdline = {
 				enabled = true,
-				keymap = {
-					-- recommended, as the default keymap will only show and select the next item
-					['<Tab>'] = { 'show', 'accept' },
-					['<CR'] = {'accept_and_enter', 'fallback'}
-				},
+				keymap = { preset = 'inherit' },
+				-- keymap = {
+				-- 	-- recommended, as the default keymap will only show and select the next item
+				-- 	['<Tab>'] = { 'show', 'accept' },
+				-- 	['<CR'] = { 'accept_and_enter', 'fallback' }
+				-- },
+				-- completion = { menu = { auto_show = true } }
+
 
 				completion = {
 					menu = {
@@ -102,6 +105,15 @@ return {
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
 				default = { 'lsp', 'buffer', 'snippets', 'path' },
+				providers = {
+					cmdline = {
+						min_keyword_length = function(ctx)
+							-- when typing a command, only show when the keyword is 3 characters or longer
+							if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+							return 0
+						end
+					}
+				}
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
