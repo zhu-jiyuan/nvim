@@ -1,6 +1,8 @@
 return {
 	{
 		'saghen/blink.cmp',
+		name = "blink_cmp",
+		-- dev = true,
 		-- optional: provides snippets for the snippet source
 		dependencies = {
 			'rafamadriz/friendly-snippets',
@@ -16,9 +18,9 @@ return {
 		},
 
 		-- use a release tag to download pre-built binaries
-		version = '1.*',
+		-- version = '1.*',
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-		-- build = 'cargo build --release',
+		build = 'cargo build --release',
 		-- If you use nix, you can build from source using latest nightly rust with:
 		-- build = 'nix run .#build-plugin',
 
@@ -79,11 +81,14 @@ return {
 			snippets = { preset = 'luasnip' },
 			cmdline = {
 				enabled = true,
-				keymap = { preset = 'inherit' },
+				keymap = {
+					preset = 'inherit',
+					['<Tab>'] = { 'show', 'accept' },
+					['<CR>'] = { 'accept_and_enter', 'fallback' }
+				},
+
 				-- keymap = {
 				-- 	-- recommended, as the default keymap will only show and select the next item
-				-- 	['<Tab>'] = { 'show', 'accept' },
-				-- 	['<CR'] = { 'accept_and_enter', 'fallback' }
 				-- },
 				-- completion = { menu = { auto_show = true } }
 
@@ -109,7 +114,7 @@ return {
 					cmdline = {
 						min_keyword_length = function(ctx)
 							-- when typing a command, only show when the keyword is 3 characters or longer
-							if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+							if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 4 end
 							return 0
 						end
 					}
