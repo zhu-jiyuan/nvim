@@ -60,65 +60,6 @@ local on_attach = function(_, bufnr)
 
 	-- lsp diagnostics
 	nmap("<leader>da", fzf_lua.lsp_workspace_diagnostics, "lsp diagnosticls")
-
-	require("lspsaga").setup({
-		outline = {
-			keys = {
-				quit = "<C-c>",
-				toggle_or_jump = "<cr>",
-			},
-		},
-		finder = {
-			keys = {
-				quit = "<C-c>",
-				edit = "<C-o>",
-				toggle_or_open = "<cr>",
-			},
-		},
-		definition = {
-			keys = {
-				edit = "<C-o>",
-				vsplit = "<C-v>",
-			},
-		},
-		code_action = {
-			keys = {
-				quit = "<C-c>",
-			},
-		},
-		ui = {
-			code_action = "🔅",
-		},
-		lightbulb = {
-			enable = true,
-			sign = true,
-			debounce = 10,
-			sign_priority = 1,
-			virtual_text = false,
-			-- enable_in_insert = true,
-		},
-		hover = {
-			keys = {
-				quit = "<C-c>",
-			},
-		},
-		rename = {
-			keys = {
-				quit = "<C-c>",
-			},
-			in_select = false,
-		},
-	})
-	vim.diagnostic.config({
-		signs = {
-			text = {
-				[vim.diagnostic.severity.ERROR] = custom.symbol.error,
-				[vim.diagnostic.severity.WARN] = custom.symbol.warn,
-				[vim.diagnostic.severity.INFO] = custom.symbol.info,
-				[vim.diagnostic.severity.HINT] = custom.symbol.hint,
-			},
-		},
-	})
 end
 
 return {
@@ -136,6 +77,64 @@ return {
 		-- 	autoformat = false,
 		-- },
 		config = function()
+			vim.diagnostic.config({
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = custom.symbol.error,
+						[vim.diagnostic.severity.WARN] = custom.symbol.warn,
+						[vim.diagnostic.severity.INFO] = custom.symbol.info,
+						[vim.diagnostic.severity.HINT] = custom.symbol.hint,
+					},
+				},
+			})
+			require("lspsaga").setup({
+				outline = {
+					keys = {
+						quit = "<C-c>",
+						toggle_or_jump = "<cr>",
+					},
+				},
+				finder = {
+					keys = {
+						quit = "<C-c>",
+						edit = "<C-o>",
+						toggle_or_open = "<cr>",
+					},
+				},
+				definition = {
+					keys = {
+						edit = "<C-o>",
+						vsplit = "<C-v>",
+					},
+				},
+				code_action = {
+					keys = {
+						quit = "<C-c>",
+					},
+				},
+				ui = {
+					code_action = "🔅",
+				},
+				lightbulb = {
+					enable = true,
+					sign = true,
+					debounce = 10,
+					sign_priority = 1,
+					virtual_text = false,
+					-- enable_in_insert = true,
+				},
+				hover = {
+					keys = {
+						quit = "<C-c>",
+					},
+				},
+				rename = {
+					keys = {
+						quit = "<C-c>",
+					},
+					in_select = false,
+				},
+			})
 			require("neoconf").setup({
 				-- override any of the default settings here
 			})
@@ -156,15 +155,19 @@ return {
 				-- ensure_installed = vim.tbl_keys(server_list),
 			})
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
 
-			for server, server_config in pairs(server_list) do
-				require("lspconfig")[server].setup(vim.tbl_deep_extend("keep", {
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = server_list[server],
-					filetypes = (server_list[server] or {}).filetypes,
-				}, server_config))
-			end
+			-- for server, server_config in pairs(server_list) do
+			-- 	require("lspconfig")[server].setup(vim.tbl_deep_extend("keep", {
+			-- 		capabilities = capabilities,
+			-- 		on_attach = on_attach,
+			-- 		settings = server_list[server],
+			-- 		filetypes = (server_list[server] or {}).filetypes,
+			-- 	}, server_config))
+			-- end
 		end,
 	},
 }
