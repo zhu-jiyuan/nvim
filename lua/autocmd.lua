@@ -35,3 +35,12 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 		vim.cmd([[Trouble qflist open]])
 	end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	pattern = "*",
+	callback = function(args)
+		local bufnr = args.buf
+		local lsp = require("lsp_setting")
+		lsp.lsp_on_attach(nil, bufnr)
+	end,
+})
