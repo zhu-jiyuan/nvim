@@ -1,4 +1,4 @@
-local disable_filetypes = { c = true, cpp = true, lua = true }
+local disable_filetypes = { c = true, cpp = true, lua = true, python = true }
 
 return {
 	{
@@ -10,7 +10,7 @@ return {
 				formatters_by_ft = {
 					lua        = { "lua_ls" },
 					-- Conform will run multiple formatters sequentially
-					python     = { "isort", "black" },
+					python     = { "isort", "black"},
 					-- Use a sub-list to run only the first available formatter
 					css        = { "prettier" },
 					javascript = { "prettier" },

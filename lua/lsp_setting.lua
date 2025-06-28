@@ -19,7 +19,7 @@ local ensure_installed_list = {
 	"yamlls",
 	"jsonls",
 
-	"ruff"
+	-- "ruff"
 }
 
 local lsp_on_attach = function(_, bufnr)
