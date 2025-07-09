@@ -147,13 +147,13 @@ local opts = {
 				-- for other components. (terrible name, any suggestions?)
 			},
 			{
-				"diagnostics",
-				symbols = {
-					error = custom.symbol.error,
-					warn = custom.symbol.warn,
-					info = custom.symbol.info,
-					hint = custom.symbol.hint,
-				},
+				"diagnostics"
+				-- symbols = {
+				-- 	error = custom.symbol.error,
+				-- 	warn = custom.symbol.warn,
+				-- 	info = custom.symbol.info,
+				-- 	hint = custom.symbol.hint,
+				-- },
 			},
 			readonly,
 		},

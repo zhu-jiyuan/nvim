@@ -23,6 +23,9 @@ map("n", "k", [[v:count ? 'k' : 'gk']], { noremap = true, expr = true })
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
+map("n", "J", "mzJ`z")
+
+
 --- save
 map("n", " ", "<NOP>", opt)
 
@@ -39,7 +42,8 @@ map("n", "<M-z>", Helper.change_window_wrap, opt)
 map("n", "[q", ":prev<CR>", opt)
 map("n", "]q", ":cnext<CR>", opt)
 
-
+map("x", "<leader>p", [["_dP]])
+map({ "n", "v" }, "<leader>d", "\"_d")
 -- telescope
 -- see plugins/telescope.lua
 -- map('n', '<leader>ff', ':Telescope find_files<CR>', opt)

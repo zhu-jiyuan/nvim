@@ -46,7 +46,7 @@ option.signcolumn = "yes"
 
 -- 右侧参考线
 
-option.colorcolumn = "160"
+option.colorcolumn = "80"
 
 -- 自动加载外部修改
 option.autoread = true
@@ -88,7 +88,7 @@ option.swapfile = false
 option.wrap = false
 
 -- smaller updatetime
-option.updatetime = 300
+option.updatetime = 50
 option.timeoutlen = 500
 option.splitbelow = true
 option.splitright = true
@@ -137,11 +137,12 @@ global.grepformat = "%f:%l:%c:%m"
 -- 将 grep 替换为静默模式
 vim.api.nvim_command('cnoreabbrev <expr> grep (getcmdtype() == ":" && getcmdline() =~# "^grep") ? "silent grep" : "grep"')
 
-option.guicursor = {
-  'n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100',
-  'i-ci:ver25-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100',
-  'r:hor50-Cursor/lCursor-blinkwait100-blinkon100-blinkoff100'
-}
+-- option.guicursor = {
+--   'n-v-c:block-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100',
+--   'i-ci:ver25-Cursor/lCursor-blinkwait1000-blinkon100-blinkoff100',
+--   'r:hor50-Cursor/lCursor-blinkwait100-blinkon100-blinkoff100'
+-- }
+option.guicursor = ""
 
 return M
 

@@ -18,17 +18,24 @@ return {
 		-- 	autoformat = false,
 		-- },
 		config = function()
+			-- vim.diagnostic.config({
+			-- 	signs = {
+			-- 		text = {
+			-- 			[vim.diagnostic.severity.ERROR] = custom.symbol.error,
+			-- 			[vim.diagnostic.severity.WARN] = custom.symbol.warn,
+			-- 			[vim.diagnostic.severity.INFO] = custom.symbol.info,
+			-- 			[vim.diagnostic.severity.HINT] = custom.symbol.hint,
+			-- 		},
+			-- 	},
+			-- })
 			vim.diagnostic.config({
-				signs = {
-					text = {
-						[vim.diagnostic.severity.ERROR] = custom.symbol.error,
-						[vim.diagnostic.severity.WARN] = custom.symbol.warn,
-						[vim.diagnostic.severity.INFO] = custom.symbol.info,
-						[vim.diagnostic.severity.HINT] = custom.symbol.hint,
-					},
-				},
+				virtual_text = false
 			})
 			require("lspsaga").setup({
+				diagnostic = {
+					diagnostic_only_current = true,
+					border_follow = false
+				},
 				outline = {
 					keys = {
 						quit = "<C-c>",
@@ -57,7 +64,7 @@ return {
 					code_action = "🔅",
 				},
 				lightbulb = {
-					enable = true,
+					enable = false,
 					sign = true,
 					debounce = 10,
 					sign_priority = 1,
