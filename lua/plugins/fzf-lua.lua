@@ -21,6 +21,8 @@ return {
 			{ "<leader>gst", ":FzfLua git_status<CR>",     desc = "git_status" },
 			{ "<leader>gb",  ":FzfLua git_branches<CR>",   desc = "git branch" },
 			{ "<leader>f?",  ":FzfLua builtin<CR>",        desc = "fzf builtin" },
+			{ "<leader>fc",  ":FzfLua command_history<CR>",desc = "command_history" },
+			{ "<leader>fz",  ":FzfLua zoxide<CR>",desc = "command_history" },
 
 		},
 		config = function()

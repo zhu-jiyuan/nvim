@@ -1,6 +1,7 @@
 
 local ensure_installed_list = {
 	"lua_ls",
+
 	"pyright",
 	"gopls",
 	"clangd",
@@ -18,6 +19,12 @@ local ensure_installed_list = {
 	--config
 	"yamlls",
 	"jsonls",
+
+	-- formatters
+	-- "isort",
+	-- "black",
+	-- "prettier",
+	-- "codespell",
 
 	-- "ruff"
 }

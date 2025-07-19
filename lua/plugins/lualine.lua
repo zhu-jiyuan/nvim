@@ -96,7 +96,7 @@ end
 local opts = {
 	options = {
 		icons_enabled = true,
-		theme = "everforest",
+		-- theme = "everforest",
 		disabled_filetypes = {
 			"alpha",
 			"TelescopePrompt",

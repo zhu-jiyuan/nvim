@@ -38,11 +38,12 @@ return {
     {
         "neanias/everforest-nvim",
         version = false,
-        lazy = false,
-        priority = 1000, -- make sure to load this before all the other start plugins
+        -- lazy = false,
+		enable = false,
+        -- priority = 1000, -- make sure to load this before all the other start plugins
         -- Optional; default configuration will be used if setup isn't called.
         config = function()
-            vim.opt.background = "light"
+            vim.opt.background = "dark"
             require("everforest").setup({
                 -- Your config here
 				background = "soft",
@@ -51,6 +52,71 @@ return {
             vim.cmd([[colorscheme everforest]])
         end,
     },
+	{
+		"oonamo/ef-themes.nvim",
+		lazy = false, 
+		enable = true,
+        priority = 1000, -- make sure to load this before all the other start plugins
+		 config = function ()
+			require("ef-themes").setup({
+				light = "ef-summer", -- Ef-theme to select for light backgrounds
+				dark = "ef-winter", -- Ef-theme to select for dark backgrounds
+				transparent = false,
+				styles = {
+					-- Set specific styles for specific highlight groups
+					-- Can be any valid attr-list value. See `:h nvim_set_hl`
+					comments = { italic = true },
+					keywords = { bold = true },
+					functions = {},
+					variables = {},
+					classes = { bold = true },
+					types = { bold = true },
+
+					diagnostic = "default", -- Can be "full"
+					pickers = "default", -- Can be "borderless"
+				},
+
+				modules = {
+					-- Enable/Disable highlights for a module
+					-- See `h: ef-themes-modules` for the list of available modules
+					blink = true,
+					fzf = true,
+					mini = true,
+					semantic_tokens = false,
+					snacks = false,
+					treesitter = true,
+				},
+
+				--- Override any color from the ef-theme
+				---@param colors Ef-Theme
+				---@param name string
+				-- on_colors = function(colors, name) end,
+
+				--- Override specific highlights
+				---@param highlights table
+				---@param colors Ef-Theme
+				---@param name string
+				---@return table
+				-- on_highlights = function(highlights, colors, name)
+				-- 	-- Returns a table of highlights
+				-- 	-- return {
+				-- 	--   Normal = { fg = colors.fg_alt, bg = colors.bg_inactive }
+				-- 	--   ObscurePlugin = { fg = colors.yellow_faint }
+				-- 	-- }
+				-- end,
+
+				options = {
+					compile = true, -- Whether to compile a theme
+					compile_path = vim.fn.stdpath("cache") .. "/ef-themes", -- Directory in which to place compiled themes
+				},
+			})
+
+            vim.opt.background = "light"
+			vim.cmd.colorscheme("ef-theme") -- To use the default colorscheme defined above
+			-- Or choose a specific theme
+			-- vim.cmd.colorscheme("ef-dream")
+		end
+	},
     -- top line
     {
         "utilyre/barbecue.nvim",

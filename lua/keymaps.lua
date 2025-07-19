@@ -50,3 +50,14 @@ map({ "n", "v" }, "<leader>d", "\"_d")
 -- map('n', '<leader>fg', ':Telescope live_grep<CR>', opt)
 -- map('n', '<leader>fb', ':Telescope buffers<CR>', opt)
 -- map('n', '<leader>fh', ':Telescope help_tags<CR>', opt)
+
+
+-- emacs insert mode
+map("i", "<C-a>", "<Home>", opt)
+map("i", "<C-e>", "<End>", opt)
+map("i", "<C-f>", "<Right>", opt)
+map("i", "<C-b>", "<Left>", opt)
+map("i", "<C-n>", "<Down>", opt)
+map("i", "<C-p>", "<Up>", opt)
+map("i", "<C-d>", "<Del>", opt)
+map("i", "<C-h>", "<BS>", opt)
