@@ -54,10 +54,15 @@ map({ "n", "v" }, "<leader>d", "\"_d")
 
 -- emacs insert mode
 map("i", "<C-a>", "<Home>", opt)
+map('c', '<C-a>', '<Home>', {silent = false, noremap = true})
+-- vim.api.nvim_set_keymap('c', '<C-a>', '<Home>', opt)
+-- vim.cmd([[cnoremap <C-a> <Home>]])
+
 map("i", "<C-e>", "<End>", opt)
-map("i", "<C-f>", "<Right>", opt)
-map("i", "<C-b>", "<Left>", opt)
-map("i", "<C-n>", "<Down>", opt)
-map("i", "<C-p>", "<Up>", opt)
-map("i", "<C-d>", "<Del>", opt)
-map("i", "<C-h>", "<BS>", opt)
+
+map({"i", "c"}, "<C-f>", "<Right>", opt)
+map({"i", "c"}, "<C-b>", "<Left>", opt)
+map({"i", "c"}, "<C-n>", "<Down>", opt)
+map({"i", "c"}, "<C-p>", "<Up>", opt)
+map({"i", "c"}, "<C-d>", "<Del>", opt)
+map({"i", "c"}, "<C-h>", "<BS>", opt)
