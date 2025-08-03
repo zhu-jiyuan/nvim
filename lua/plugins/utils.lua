@@ -204,6 +204,12 @@ return {
 			end)
 		end,
 	},
+	{
+		'mcauley-penney/visual-whitespace.nvim',
+		config = true,
+		event = "ModeChanged *:[vV\22]", -- optionally, lazy load on entering visual mode
+		opts = {},
+	}
 	-- {
 	--     "nosduco/remote-sshfs.nvim",
 	--     dependencies = "nvim-telescope/telescope.nvim",
