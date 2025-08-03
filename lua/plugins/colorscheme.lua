@@ -38,12 +38,12 @@ return {
     {
         "neanias/everforest-nvim",
         version = false,
-        -- lazy = false,
-		enable = false,
-        -- priority = 1000, -- make sure to load this before all the other start plugins
+        lazy = false,
+		enable = true,
+        priority = 1000, -- make sure to load this before all the other start plugins
         -- Optional; default configuration will be used if setup isn't called.
         config = function()
-            vim.opt.background = "dark"
+            vim.opt.background = "light"
             require("everforest").setup({
                 -- Your config here
 				background = "soft",
@@ -54,8 +54,8 @@ return {
     },
 	{
 		"oonamo/ef-themes.nvim",
-		lazy = false, 
-		enable = true,
+		-- lazy = false, 
+		enable = false,
         priority = 1000, -- make sure to load this before all the other start plugins
 		 config = function ()
 			require("ef-themes").setup({

@@ -16,7 +16,7 @@ return {
 					javascript = { "prettier" },
 					typescript = { "prettier" },
 					html       = { "prettier" },
-					["*"]      = { "prettier", "codespell" },
+					-- ["*"]      = { "prettier", "codespell" },
 				},
 				format_on_save = function(bufnr)
 					if disable_filetypes[vim.bo[bufnr].filetype] then
