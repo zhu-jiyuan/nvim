@@ -25,3 +25,4 @@ require("lazy").setup(
 		defaults = { lazy = true },
 	}
 )
+vim.g.lazydev_enabled = false -- 开启lazydev

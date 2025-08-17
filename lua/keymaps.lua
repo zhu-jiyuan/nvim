@@ -11,7 +11,7 @@ map("n", "N", "Nzzzv")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+-- map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- ESC
 map("i", "<C-c>", "<ESC>", opt)
 

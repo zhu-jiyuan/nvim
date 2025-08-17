@@ -8,7 +8,6 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		dependencies = {
-			{ "folke/neodev.nvim",  opts = {} },
 			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
@@ -86,7 +85,7 @@ return {
 			require("neoconf").setup({
 				-- override any of the default settings here
 			})
-			require("neodev").setup()
+			-- require("neodev").setup()
 			-- require "lspsaga".setup()
 
 			require("mason").setup({
