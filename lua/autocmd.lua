@@ -42,5 +42,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 		local lsp = require("lsp_setting")
 		lsp.lsp_on_attach(nil, bufnr)
-	end,
+		local ok = pcall(require, "copilot")
+		if ok then
+		if vim.fn.exists(":Copilot") == 2 then
+			vim.cmd("silent! Copilot enable")
+		end
+    end
+  end,
 })
+
