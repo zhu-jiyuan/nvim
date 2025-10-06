@@ -11,7 +11,6 @@ return {
 			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"nvimdev/lspsaga.nvim",
 		},
 		-- opts = {
 		-- 	autoformat = false,
@@ -29,58 +28,6 @@ return {
 			-- })
 			vim.diagnostic.config({
 				virtual_text = false
-			})
-			require("lspsaga").setup({
-				diagnostic = {
-					diagnostic_only_current = true,
-					border_follow = false
-				},
-				outline = {
-					keys = {
-						quit = "<C-c>",
-						toggle_or_jump = "<cr>",
-					},
-				},
-				finder = {
-					keys = {
-						quit = "<C-c>",
-						edit = "<C-o>",
-						toggle_or_open = "<cr>",
-					},
-				},
-				definition = {
-					keys = {
-						edit = "<C-o>",
-						vsplit = "<C-v>",
-					},
-				},
-				code_action = {
-					keys = {
-						quit = "<C-c>",
-					},
-				},
-				ui = {
-					code_action = "🔅",
-				},
-				lightbulb = {
-					enable = false,
-					sign = true,
-					debounce = 10,
-					sign_priority = 1,
-					virtual_text = false,
-					-- enable_in_insert = true,
-				},
-				hover = {
-					keys = {
-						quit = "<C-c>",
-					},
-				},
-				rename = {
-					keys = {
-						quit = "<C-c>",
-					},
-					in_select = false,
-				},
 			})
 			require("neoconf").setup({
 				-- override any of the default settings here

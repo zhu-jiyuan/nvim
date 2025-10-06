@@ -19,7 +19,7 @@ local ensure_installed_list = {
 	--config
 	"yamlls",
 	"jsonls",
-
+	"buf_ls",
 	-- formatters
 	-- "isort",
 	-- "black",
@@ -50,9 +50,13 @@ local lsp_on_attach = function(_, bufnr)
 	-- 	vim.lsp.buf.code_action()
 	-- end, "[C]ode [A]ction")
 
-	nmap("<leader>rn", "<cmd>Lspsaga rename<cr>", "Rename")
-	nmap("<leader>ca", "<cmd>Lspsaga code_action<CR>", "Code Action")
-	nmap("<leader>ot", "<cmd>Lspsaga outline<CR>", "OutLine")
+	nmap("<leader>rn", function ()
+		vim.lsp.buf.rename()
+	end, "Rename")
+	nmap("<leader>ca", function ()
+		vim.lsp.buf.code_action()
+	end, "Code Action")
+	-- nmap("<leader>ot", "<cmd>Lspsaga outline<CR>", "OutLine")
 
 	local fzf_lua = require("fzf-lua")
 	nmap("gd", fzf_lua.lsp_definitions, "[G]oto [D]efinition")
@@ -62,15 +66,14 @@ local lsp_on_attach = function(_, bufnr)
 	nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", fzf_lua.lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
 	-- See `:help K` for why this keymap
-	-- nmap("K", function()
-	-- 	vim.lsp.buf.hover()
-	-- end, "Hover Documentation")
-	nmap("<leader>K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
-	nmap("<leader>pd", "<cmd>Lspsaga peek_definition<CR>", "Peek Definition")
+	nmap("<leader>K", function()
+		vim.lsp.buf.hover()
+	end, "Hover Documentation")
+	-- nmap("<leader>K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
+	-- nmap("<leader>pd", "<cmd>Lspsaga peek_definition<CR>", "Peek Definition")
 
 	nmap("<leader>H", vim.lsp.buf.signature_help, "Signature Documentation")
 	vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
-
 
 	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
