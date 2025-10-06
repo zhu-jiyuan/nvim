@@ -51,3 +51,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+
+-- https://github.com/neovim/neovim/issues/28692
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+  end,
+})
+
