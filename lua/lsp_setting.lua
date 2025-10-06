@@ -20,6 +20,7 @@ local ensure_installed_list = {
 	"yamlls",
 	"jsonls",
 	"buf_ls",
+	"tailwindcss"
 	-- formatters
 	-- "isort",
 	-- "black",
