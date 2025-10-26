@@ -44,18 +44,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		lsp.lsp_on_attach(nil, bufnr)
 		local ok = pcall(require, "copilot")
 		if ok then
-		if vim.fn.exists(":Copilot") == 2 then
-			vim.cmd("silent! Copilot enable")
+			if vim.fn.exists(":Copilot") == 2 then
+				vim.cmd("silent! Copilot enable")
+			end
 		end
-    end
-  end,
+	end,
 })
 
 
 -- https://github.com/neovim/neovim/issues/28692
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function(args)
-    vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-  end,
+	callback = function(args)
+		vim.opt.foldmethod = "expr"
+		vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+	end,
 })
-
