@@ -29,10 +29,6 @@ return {
 			-- calling `setup` is optional for customization
 			local fzf_lua = require("fzf-lua")
 			fzf_lua.setup({
-				-- winopts = {
-				--     preview = { default = 'bat_native' }
-				-- },
-				-- fzf_colors = true,
 				previewers = {
 					bat = {
 						cmd = "bat",
@@ -41,12 +37,6 @@ return {
 						-- theme = "Coldark-Dark",
 					}
 				},
-				-- fzf = {
-				--     cursorline = {
-				--         ["fg+"] = "#d41e1e",
-				--         ["bg+"] = "#d41e1e"
-				--     }
-				-- }
 
 			})
 			local config = require("fzf-lua.config")

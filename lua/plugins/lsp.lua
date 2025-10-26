@@ -12,29 +12,26 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
-		-- opts = {
-		-- 	autoformat = false,
-		-- },
 		config = function()
 			-- vim.diagnostic.config({
-			-- 	signs = {
-			-- 		text = {
-			-- 			[vim.diagnostic.severity.ERROR] = custom.symbol.error,
-			-- 			[vim.diagnostic.severity.WARN] = custom.symbol.warn,
-			-- 			[vim.diagnostic.severity.INFO] = custom.symbol.info,
-			-- 			[vim.diagnostic.severity.HINT] = custom.symbol.hint,
-			-- 		},
-			-- 	},
+			-- 	virtual_text = false
 			-- })
 			vim.diagnostic.config({
-				virtual_text = false
+				virtual_text = true,
+				-- update_in_insert = true,
+				float = {
+					focusable = false,
+					style = "minimal",
+					border = "rounded",
+					source = true,
+					header = "",
+					prefix = "",
+				},
 			})
+
 			require("neoconf").setup({
 				-- override any of the default settings here
 			})
-			-- require("neodev").setup()
-			-- require "lspsaga".setup()
-
 			require("mason").setup({
 				ui = {
 					icons = {
@@ -54,14 +51,6 @@ return {
 				on_attach = on_attach,
 			})
 
-			-- for server, server_config in pairs(server_list) do
-			-- 	require("lspconfig")[server].setup(vim.tbl_deep_extend("keep", {
-			-- 		capabilities = capabilities,
-			-- 		on_attach = on_attach,
-			-- 		settings = server_list[server],
-			-- 		filetypes = (server_list[server] or {}).filetypes,
-			-- 	}, server_config))
-			-- end
 		end,
 	},
 }

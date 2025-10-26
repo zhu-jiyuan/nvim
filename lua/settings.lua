@@ -95,15 +95,11 @@ option.splitright = true
 
 -- 自动补全不自动选中
 
-option.completeopt = "menu,menuone,noselect,noinsert"
+-- option.completeopt = "menu,menuone,noselect,noinsert"
 option.termguicolors = true
 
 -- 样式
-
 -- option.background = "light"
---opt.termguicolors = true
---opt.termguicolors = true
-
 -- 不可见字符的显示，这里只把空格显示为一个点
 
 option.list = false
@@ -144,5 +140,6 @@ vim.api.nvim_command('cnoreabbrev <expr> grep (getcmdtype() == ":" && getcmdline
 -- }
 option.guicursor = ""
 
+-- vim.g.lazydev_enabled = true
 return M
 

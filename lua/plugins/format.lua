@@ -24,8 +24,9 @@ return {
 					end
 					return {
 						-- async = true,
-						timeout_ms = 100,
+						timeout_ms = 5000,
 						lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+						lsp_format = "fallback",
 					}
 				end,
 			})

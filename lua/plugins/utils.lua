@@ -90,6 +90,7 @@ return {
 		cmd = "Trouble",
 		opts = {
 			auto_preview = false,
+			icons = false,
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
@@ -124,6 +125,11 @@ return {
 				"<leader>oq",
 				"<cmd>Trouble qflist toggle<cr>",
 				desc = "Quickfix List (Trouble)",
+			},
+			{
+				"<leader>ot",
+				"<cmd>Trouble toggle<cr>",
+				desc = "Trouble",
 			},
 		},
 	},
