@@ -19,7 +19,8 @@ local ensure_installed_list = {
 	--config
 	"yamlls",
 	"jsonls",
-	"buf_ls",
+	-- "buf_ls",
+	"protols",
 	"tailwindcss"
 	-- formatters
 	-- "isort",

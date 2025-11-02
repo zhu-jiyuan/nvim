@@ -10,6 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+vim.g.lazydev_enabled = true -- 开启lazydev
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(
@@ -26,4 +27,3 @@ require("lazy").setup(
 		defaults = { lazy = true },
 	}
 )
-vim.g.lazydev_enabled = false -- 开启lazydev
