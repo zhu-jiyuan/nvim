@@ -1,4 +1,3 @@
-
 local ensure_installed_list = {
 	"lua_ls",
 
@@ -21,7 +20,7 @@ local ensure_installed_list = {
 	"jsonls",
 	-- "buf_ls",
 	"protols",
-	"tailwindcss"
+	"tailwindcss",
 	-- formatters
 	-- "isort",
 	-- "black",
@@ -52,30 +51,28 @@ local lsp_on_attach = function(_, bufnr)
 	-- 	vim.lsp.buf.code_action()
 	-- end, "[C]ode [A]ction")
 
-	nmap("<leader>rn", function ()
+	nmap("<leader>rn", function()
 		vim.lsp.buf.rename()
 	end, "Rename")
-	nmap("<leader>ca", function ()
-		vim.lsp.buf.code_action()
-	end, "Code Action")
 	-- nmap("<leader>ot", "<cmd>Lspsaga outline<CR>", "OutLine")
 
 	local fzf_lua = require("fzf-lua")
+	nmap("<leader>ca", function()
+		fzf_lua.lsp_code_actions()
+	end, "Code Action")
 	nmap("gd", fzf_lua.lsp_definitions, "[G]oto [D]efinition")
 	nmap("gr", fzf_lua.lsp_references, "[G]oto [R]eferences")
 	nmap("gI", fzf_lua.lsp_implementations, "[G]oto [I]mplementation")
-	nmap("<leader>D", fzf_lua.lsp_typedefs, "Type [D]efinition")
+	nmap("<leader>pd", fzf_lua.lsp_typedefs, "Type [D]efinition")
 	nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", fzf_lua.lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
 	-- See `:help K` for why this keymap
 	nmap("<leader>K", function()
 		vim.lsp.buf.hover()
 	end, "Hover Documentation")
-	-- nmap("<leader>K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
-	-- nmap("<leader>pd", "<cmd>Lspsaga peek_definition<CR>", "Peek Definition")
 
-	nmap("<leader>H", vim.lsp.buf.signature_help, "Signature Documentation")
-	vim.keymap.set("i", "<c-s>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
+	nmap("<leader>h>", vim.lsp.buf.signature_help, "Signature Documentation")
+	vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
 
 	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -86,15 +83,13 @@ local lsp_on_attach = function(_, bufnr)
 	end, "[W]orkspace [L]ist Folders")
 
 	-- Create a command `:Format` local to the LSP buffer
-	nmap("<leader>fm", function()
+	nmap("<leader>M", function()
 		require("conform").format({ async = true, lsp_fallback = true })
 	end, "Format current buffer")
 
 	-- lsp diagnostics
 	nmap("<leader>da", fzf_lua.lsp_workspace_diagnostics, "lsp diagnosticls")
 end
-
-
 
 return {
 	ensure_installed_list = ensure_installed_list,
