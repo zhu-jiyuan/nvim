@@ -43,7 +43,7 @@ return {
 			keymap = {
 				preset = 'enter',
 
-				['<C-i>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
+				['<C-s>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
 				['<C-Enter>'] = { 'show', 'show_documentation', 'hide_documentation' },
 			},
 			signature = { enabled = true },

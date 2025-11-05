@@ -1,7 +1,8 @@
 local ensure_installed_list = {
 	"lua_ls",
 
-	"pyright",
+	-- "pyright",
+	"basedpyright",
 	"gopls",
 	"clangd",
 	-- "csharp_ls",
@@ -71,8 +72,8 @@ local lsp_on_attach = function(_, bufnr)
 		vim.lsp.buf.hover()
 	end, "Hover Documentation")
 
-	nmap("<leader>h>", vim.lsp.buf.signature_help, "Signature Documentation")
-	vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
+	nmap("<leader>h", vim.lsp.buf.signature_help, "Signature Documentation")
+	vim.keymap.set("i", "<C-H>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
 
 	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
