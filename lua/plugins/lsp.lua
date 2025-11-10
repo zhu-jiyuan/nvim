@@ -12,6 +12,15 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
+		opts = {
+			capabilities = {
+				workspace = {
+					didChangeWatchedFiles = {
+						dynamicRegistration = true,
+					},
+				},
+			},
+		},
 		config = function()
 			-- vim.diagnostic.config({
 			-- 	virtual_text = false
@@ -43,14 +52,13 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = LspSetting.ensure_installed_list
+				ensure_installed = LspSetting.ensure_installed_list,
 			})
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			vim.lsp.config("*", {
 				capabilities = capabilities,
 				on_attach = on_attach,
 			})
-
 		end,
 	},
 }
