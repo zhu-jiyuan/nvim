@@ -1,6 +1,5 @@
 return {
 	{
-		-- dir = "~/dev/go-impl.nvim",
 		"fang2hou/go-impl.nvim",
 		ft = "go",
 		dependencies = {

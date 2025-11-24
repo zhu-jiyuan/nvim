@@ -4,7 +4,6 @@ return {
 		event = "BufReadPre",
 		config = function()
 			require("gitsigns").setup({
-				-- current_line_blame = true,
 			})
 		end,
 	},
@@ -15,7 +14,6 @@ return {
             { "<leader>dv", "<cmd>DiffviewOpen<CR>", desc = "Git open diffview panel" },
         },
         opts = function()
-            -- dofile(vim.g.base46_cache .. "diffview")
             return {
                 view = {
                     merge_tool = {
@@ -30,7 +28,6 @@ return {
                     file_history_panel = { q = "<cmd>DiffviewClose<CR>" },
                 },
                 hooks = {
-                    -- Change local options in diff buffers
                     diff_buf_read = function()
                         vim.opt_local.wrap = false
                         vim.opt_local.list = false
@@ -48,11 +45,10 @@ return {
 		"NeogitOrg/neogit",
 		cmd = "Neogit",
 		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
 
-			-- Only one of these is needed.
-			"ibhagwan/fzf-lua", -- optional
+			"ibhagwan/fzf-lua",
 		},
 		keys = {
 			{ "<leader>go", ":Neogit cwd=%:p:h<CR>",               desc = "Uses the repository of the current file" },

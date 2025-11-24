@@ -1,10 +1,8 @@
 return {
-	-- cmp pairs
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		-- dependencies = { "hrsh7th/nvim-cmp" },
-		opts = {}, -- this is equalent to setup({}) function
+		opts = {},
 		config = true,
 	},
 	{
@@ -20,45 +18,30 @@ return {
 			require('nvim-ts-autotag').setup({
 				opts = {
 
-					enable_close = false, -- Auto close tags
-					enable_rename = true, -- Auto rename pairs of tags
-					enable_close_on_slash = true -- Auto close on trailing </
+					enable_close = false,
+					enable_rename = true,
+					enable_close_on_slash = true
 				},
-				-- Also override individual filetype configs, these take priority.
-				-- Empty by default, useful if one of the "opts" global settings
-				-- doesn't work well in a specific filetype
-				--[[ per_filetype = {
-            ["html"] = {
-              enable_close = false
-            }
-          } ]]
 
 			})
 		end
 
 	},
-	-- tip key
 	{
 		"folke/which-key.nvim",
 		event = "BufReadPre",
-		-- event = "VimEnter",
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 1000
 		end,
 		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
 		},
 	},
 	{
 		"folke/persistence.nvim",
-		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		event = "BufReadPre",
 		cmd = "RestoreSession",
 		opts = {
-			-- add any custom options here
-			--
 		},
 		init = function()
 			vim.api.nvim_create_user_command("RestoreSession", function()
@@ -89,10 +72,6 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"LunarVim/bigfile.nvim",
-	-- 	event = "BufReadPre", -- this will only start session saving when an actual file was opened
-	-- },
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
@@ -112,11 +91,10 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		version = "*",
 		event = "InsertEnter",
 		config = function()
 			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
 			})
 		end
 	},
@@ -140,7 +118,6 @@ return {
 	{
 		"jake-stewart/multicursor.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		-- stylua: ignore
 		config = function()
 			local mc = require("multicursor-nvim")
 			local map = vim.keymap.set
@@ -158,7 +135,7 @@ return {
 					mc.enableCursors()
 				elseif mc.hasCursors() then
 					mc.clearCursors()
-				else -- fallback to clear highlights
+				else
 					vim.cmd("noh")
 					vim.lsp.buf.clear_references()
 				end
@@ -168,40 +145,7 @@ return {
 	{
 		'mcauley-penney/visual-whitespace.nvim',
 		config = true,
-		event = "ModeChanged *:[vV\22]", -- optionally, lazy load on entering visual mode
+		event = "ModeChanged *:[vV\22]",
 		opts = {},
 	}
-	-- {
-	--     "nosduco/remote-sshfs.nvim",
-	--     dependencies = "nvim-telescope/telescope.nvim",
-	--     cmd = { "RemoteSSHFSConnect" },
-	--     opts = {},
-	-- },
-
-
-	-- install without yarn or npm
-	-- web markdown preview.
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	-- 	ft = { "markdown" },
-	-- 	build = function() vim.fn["mkdp#util#install"]() end,
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>mp",
-	-- 			ft = "markdown",
-	-- 			"<cmd>MarkdownPreviewToggle<cr>",
-	-- 			desc = "Markdown Preview",
-	-- 		},
-	-- 	},
-	-- }
-
-	-- nvim 0.10 is support this plugin.
-	-- {
-	--     'numToStr/Comment.nvim',
-	--     opts = {
-	--         -- add any options here
-	--     },
-	--     lazy = false,
-	-- }
 }

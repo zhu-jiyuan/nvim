@@ -58,45 +58,10 @@ local function get_copilot()
 	return " "
 end
 
--- local bufline = {
---     lualine_a = {
---         {
---             "buffers",
---             cond = function()
---                 return vim.bo.filetype ~= "alpha"
---             end,
---             mode = 2,
---             section_separators = { left = "", right = "" },
---             use_mode_colors = true,
---             filetype_names = {
---                 TelescopePrompt = " Telescope",
---                 fzf = " FZF",
---                 alpha = "󰏘 Alpha",
---                 minifiles = " Mini.Files",
---                 toggleterm = "ToggleTerm",
---                 checkhealth = "󰄳 Checkhelth",
---                 oil = " Oil",
---                 Outline = "󰇽 Outline",
---                 lazy = "󰜢 Lazy",
---                 Mundo = " Mundo",
---                 MundoDiff = " MundoDiff",
---                 CompetiTest = " CompetiTest",
---                 lspinfo = " LspInfo",
---             },
---             symbols = {
---                 modified = " ●",
---                 alternate_file = "",
---                 directory = "󰉋",
---             },
---         },
---     },
---     lualine_z = {},
--- }
 
 local opts = {
 	options = {
 		icons_enabled = true,
-		-- theme = "everforest",
 		disabled_filetypes = {
 			"alpha",
 			"TelescopePrompt",
@@ -136,24 +101,13 @@ local opts = {
 			},
 			{
 				'filename',
-				file_status = false, -- Displays file status (readonly status, modified status)
-				path = 1,            -- 0: Just the filename
-				-- 1: Relative path
-				-- 2: Absolute path
-				-- 3: Absolute path, with tilde as the home directory
-				-- 4: Filename and parent dir, with tilde as the home directory
+				file_status = false,
+				path = 1,
 
-				shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-				-- for other components. (terrible name, any suggestions?)
+				shorting_target = 40,
 			},
 			{
 				"diagnostics"
-				-- symbols = {
-				-- 	error = custom.symbol.error,
-				-- 	warn = custom.symbol.warn,
-				-- 	info = custom.symbol.info,
-				-- 	hint = custom.symbol.hint,
-				-- },
 			},
 			readonly,
 		},
@@ -209,13 +163,11 @@ local opts = {
 			},
 			{
 				"progress",
-				-- separator = { right = "" },
 				icon = { "󰇽", align = "left" },
 				padding = { left = 0, right = 2 },
 			},
 		},
 	},
-	-- tabline = bufline,
 	extensions = {
 		"oil",
 		"man",
@@ -237,7 +189,6 @@ return {
 	end,
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
-		-- { "ofseed/copilot-status.nvim" },
 	},
 	config = function()
 		require("lualine").setup(opts)

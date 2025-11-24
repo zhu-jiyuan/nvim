@@ -22,12 +22,8 @@ return {
 			},
 		},
 		config = function()
-			-- vim.diagnostic.config({
-			-- 	virtual_text = false
-			-- })
 			vim.diagnostic.config({
 				virtual_text = true,
-				-- update_in_insert = true,
 				float = {
 					focusable = false,
 					style = "minimal",
@@ -39,7 +35,6 @@ return {
 			})
 
 			require("neoconf").setup({
-				-- override any of the default settings here
 			})
 			require("mason").setup({
 				ui = {
