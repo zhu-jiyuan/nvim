@@ -1,7 +1,6 @@
 return {
 	{
 		"ibhagwan/fzf-lua",
-		-- optional for icon support
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			{ "junegunn/fzf", build = "./install --bin" },
@@ -29,15 +28,12 @@ return {
 			{ "<leader>fr", ":FzfLua lsp_references<CR>", desc = "lsp_references" },
 		},
 		config = function()
-			-- calling `setup` is optional for customization
 			local fzf_lua = require("fzf-lua")
 			fzf_lua.setup({
 				previewers = {
 					bat = {
 						cmd = "bat",
 						args = "--style=numbers,changes --color=always",
-						-- theme = "ansi",
-						-- theme = "Coldark-Dark",
 					},
 				},
 				grep = {

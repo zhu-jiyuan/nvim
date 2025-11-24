@@ -1,43 +1,25 @@
 local ensure_installed_list = {
 	"lua_ls",
 
-	-- "pyright",
 	"basedpyright",
 	"gopls",
 	"clangd",
-	-- "csharp_ls",
 	"ts_ls",
 	"rust_analyzer",
 
-	-- web dev
 	"eslint",
 	"cssls",
 	"html",
 
 	"sqlls",
 
-	--config
 	"yamlls",
 	"jsonls",
-	-- "buf_ls",
 	"protols",
 	"tailwindcss",
-	-- formatters
-	-- "isort",
-	-- "black",
-	-- "prettier",
-	-- "codespell",
-
-	-- "ruff"
 }
 
 local lsp_on_attach = function(_, bufnr)
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -45,17 +27,9 @@ local lsp_on_attach = function(_, bufnr)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	end
 
-	-- nmap("<leader>rn", function()
-	-- 	vim.lsp.buf.rename()
-	-- end, "[R]e[n]ame")
-	-- nmap("<leader>ca", function()
-	-- 	vim.lsp.buf.code_action()
-	-- end, "[C]ode [A]ction")
-
 	nmap("<leader>rn", function()
 		vim.lsp.buf.rename()
 	end, "Rename")
-	-- nmap("<leader>ot", "<cmd>Lspsaga outline<CR>", "OutLine")
 
 	local fzf_lua = require("fzf-lua")
 	nmap("<leader>ca", function()
@@ -67,7 +41,6 @@ local lsp_on_attach = function(_, bufnr)
 	nmap("<leader>pd", fzf_lua.lsp_typedefs, "Type [D]efinition")
 	nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", fzf_lua.lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
-	-- See `:help K` for why this keymap
 	nmap("<leader>K", function()
 		vim.lsp.buf.hover()
 	end, "Hover Documentation")
@@ -75,7 +48,6 @@ local lsp_on_attach = function(_, bufnr)
 	nmap("<leader>h", vim.lsp.buf.signature_help, "Signature Documentation")
 	vim.keymap.set("i", "<C-H>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
 
-	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -83,12 +55,10 @@ local lsp_on_attach = function(_, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "[W]orkspace [L]ist Folders")
 
-	-- Create a command `:Format` local to the LSP buffer
 	nmap("<leader>M", function()
 		require("conform").format({ async = true, lsp_fallback = true })
 	end, "Format current buffer")
 
-	-- lsp diagnostics
 	nmap("<leader>da", fzf_lua.lsp_workspace_diagnostics, "lsp diagnosticls")
 end
 

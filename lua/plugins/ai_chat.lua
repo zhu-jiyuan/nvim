@@ -2,15 +2,13 @@ return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
         dependencies = {
-            { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-            { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+            { "zbirenbaum/copilot.lua" },
+            { "nvim-lua/plenary.nvim" },
         },
-        build = "make tiktoken",          -- Only on MacOS or Linux
+        build = "make tiktoken",
         opts = {
-            debug = false,                -- Enable debugging
-            -- See Configuration section for rest
+            debug = false,
         },
-        -- See Commands section for default commands if you want to lazy load on them
         keys = {
             { "<c-s>",     "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
             { "<leader>a", "",     desc = "+ai",        mode = { "n", "v" } },
