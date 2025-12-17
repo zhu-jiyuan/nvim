@@ -2,7 +2,10 @@ local ensure_installed_list = {
 	"lua_ls",
 
 	-- "pyright",
-	"basedpyright",
+	-- "basedpyright",
+	"ty",
+	"ruff",
+
 	"gopls",
 	"clangd",
 	-- "csharp_ls",
@@ -13,8 +16,8 @@ local ensure_installed_list = {
 	"eslint",
 	"cssls",
 	"html",
-
-	"sqlls",
+	"postgres_lsp",
+	-- "sqlls",
 
 	--config
 	"yamlls",
