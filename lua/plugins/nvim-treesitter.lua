@@ -12,6 +12,7 @@ return {
 		build = ":TSUpdate",
 		-- event = "VeryLazy",
 		event = "BufReadPost",
+		branch = "master",
 		config = function()
 			local configs = require("nvim-treesitter.configs")
 
