@@ -47,7 +47,6 @@ return {
 				"typst",
 				"vim",
 				"vimdoc",
-				"vue",
 				"yaml",
 				"zsh"
 			})
