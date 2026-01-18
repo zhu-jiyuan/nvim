@@ -15,18 +15,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-	callback = function()
-		vim.defer_fn(function()
-			-- option.foldcolumn = "1"
-			-- opt.foldtext = ""
-
-			-- option.foldnestmax = 3
-			option.foldlevel = 99
-			option.foldlevelstart = 99
-		end, 150)
-	end,
-})
 
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	callback = function()
@@ -75,6 +63,18 @@ vim.api.nvim_create_autocmd("FileType", {
 			-- Indentation
 			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 			-- vim.print("Treesitter enabled for " .. filetype .. " (" .. lang .. ")")
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+	desc = 'Enable foldcolumn for normal files',
+	pattern = 'buftype',
+	callback = function()
+		if vim.bo.buftype == '' then
+			vim.wo.foldcolumn = '1'
+		else
+			vim.wo.foldcolumn = '0'
 		end
 	end,
 })

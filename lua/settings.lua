@@ -108,14 +108,9 @@ option.wildmenu = true
 -- opt.shortmess = vim.o.shortmess .. "c"
 
 -- 代码折叠
--- option.foldmethod = "expr"
--- option.foldexpr = "nvim_treesitter#foldexpr()"
--- option.foldcolumn = "1"
--- -- opt.foldtext = ""
---
--- option.foldnestmax = 3
--- option.foldlevel = 99
--- option.foldlevelstart = 10
+option.foldcolumn = '1'
+option.foldlevel = 99
+option.foldlevelstart = 99
 
 -- option.exrc = true
 -- 补全显示10行
