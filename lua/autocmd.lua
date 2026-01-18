@@ -18,8 +18,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.api.nvim_create_autocmd("BufReadPost", {
 	callback = function()
 		vim.defer_fn(function()
-			option.foldexpr = "nvim_treesitter#foldexpr()"
-			option.foldmethod = "expr"
 			-- option.foldcolumn = "1"
 			-- opt.foldtext = ""
 
@@ -48,14 +46,35 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				vim.cmd("silent! Copilot enable")
 			end
 		end
+		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+		-- Enable LSP-based folding if supported.
+		if client:supports_method('textDocument/foldingRange', bufnr) then
+			vim.o.foldmethod = 'expr'
+			vim.o.foldexpr = 'v:lua.vim.lsp.foldexpr()'
+			vim.o.foldtext = 'v:lua.vim.lsp.foldtext()'
+		end
 	end,
 })
 
 
 -- https://github.com/neovim/neovim/issues/28692
 vim.api.nvim_create_autocmd("FileType", {
+	desc = 'Enable treesitter-based features for supported filetypes',
 	callback = function(args)
-		vim.opt.foldmethod = "expr"
-		vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+		local bufnr = args.buf
+		local filetype = args.match
+		local lang = vim.treesitter.language.get_lang(filetype)
+		if lang and vim.treesitter.language.add(lang) then
+			-- Highlighting
+			vim.treesitter.start(bufnr, lang)
+			-- Folds
+			vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+			vim.wo[0][0].foldmethod = 'expr'
+			-- vim.opt.foldmethod = "expr"
+			-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+			-- Indentation
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			-- vim.print("Treesitter enabled for " .. filetype .. " (" .. lang .. ")")
+		end
 	end,
 })
