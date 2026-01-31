@@ -6,16 +6,16 @@ return {
 		-- optional: provides snippets for the snippet source
 		dependencies = {
 			'rafamadriz/friendly-snippets',
-			{
-				'L3MON4D3/LuaSnip',
-				dependencies = { "rafamadriz/friendly-snippets" },
-				version = 'v2.*',
-				build = "make install_jsregexp",
-				config = function()
-					require("luasnip.loaders.from_vscode").lazy_load()
-					require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
-				end
-			}
+			-- {
+			-- 	'L3MON4D3/LuaSnip',
+			-- 	dependencies = { "rafamadriz/friendly-snippets" },
+			-- 	version = 'v2.*',
+			-- 	build = "make install_jsregexp",
+			-- 	config = function()
+			-- 		require("luasnip.loaders.from_vscode").lazy_load()
+			-- 		require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
+			-- 	end
+			-- }
 		},
 
 		-- use a release tag to download pre-built binaries
