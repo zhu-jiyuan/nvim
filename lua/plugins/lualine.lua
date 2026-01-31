@@ -111,8 +111,8 @@ local opts = {
 		lualine_a = {
 			{
 				modified,
-				separator = { left = "", right = "" },
-				padding = { left = 1, right = 0 },
+				separator = { left = "", right = "" },
+				padding = { left = 0, right = 0 },
 			},
 			{
 				"mode",
@@ -209,7 +209,7 @@ local opts = {
 			},
 			{
 				"progress",
-				-- separator = { right = "" },
+				separator = { right = "" },
 				icon = { "󰇽", align = "left" },
 				padding = { left = 0, right = 2 },
 			},
