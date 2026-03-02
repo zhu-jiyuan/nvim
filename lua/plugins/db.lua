@@ -4,7 +4,7 @@ return {
 	{
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = { "tpope/vim-dadbod" },
-		cmd = { "DB", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
+		cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
 		init = function()
 			vim.g.db_ui_save_location = vim.fn.stdpath("data") .. "/db_ui"
 			vim.g.db_ui_execute_on_save = 0
