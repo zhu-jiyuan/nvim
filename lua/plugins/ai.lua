@@ -3,6 +3,9 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
+		dependencies = {
+			"copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+		},
 		config = function()
 			require("copilot").setup({
 				suggestion = {
@@ -19,6 +22,7 @@ return {
 					},
 				},
 			})
+			vim.g.copilot_nes_debounce = 500
 		end,
 	},
 }
