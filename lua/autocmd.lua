@@ -28,12 +28,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 		local lsp = require("lsp_setting")
 		lsp.lsp_on_attach(nil, bufnr)
-		local ok = pcall(require, "copilot")
-		if ok then
-			if vim.fn.exists(":Copilot") == 2 then
-				vim.cmd("silent! Copilot enable")
-			end
-		end
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 		-- Enable LSP-based folding if supported.
 		if client:supports_method('textDocument/foldingRange', bufnr) then
