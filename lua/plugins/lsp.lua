@@ -31,7 +31,7 @@ return {
 				float = {
 					focusable = false,
 					style = "minimal",
-					border = "rounded",
+					border = custom.border,
 					source = true,
 					header = "",
 					prefix = "",
