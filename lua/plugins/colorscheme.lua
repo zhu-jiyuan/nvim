@@ -50,6 +50,9 @@ return {
 
             })
             vim.cmd([[colorscheme everforest]])
+            -- Set a readable cursor color (dark cursor on light theme)
+            vim.api.nvim_set_hl(0, "Cursor", { fg = "#ffffff", bg = "#5f3f8f" })
+            vim.api.nvim_set_hl(0, "lCursor", { fg = "#ffffff", bg = "#5f3f8f" })
         end,
     },
 	{
