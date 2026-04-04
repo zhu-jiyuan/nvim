@@ -3,7 +3,7 @@ return {
     {
         "ellisonleao/gruvbox.nvim",
         -- priority = 1000,
-		enable = false,
+		enabled = false,
 		-- lazy = false,
         config = function()
             require("gruvbox").setup({
@@ -58,7 +58,7 @@ return {
 	{
 		"oonamo/ef-themes.nvim",
 		-- lazy = false, 
-		enable = false,
+		enabled = false,
         priority = 1000, -- make sure to load this before all the other start plugins
 		 config = function ()
 			require("ef-themes").setup({
