@@ -120,20 +120,14 @@ return {
 			-- vim.cmd.colorscheme("ef-dream")
 		end
 	},
-    -- top line
+    -- winbar breadcrumbs
     {
-        "utilyre/barbecue.nvim",
-        name = "barbecue",
-        -- event = "VeryLazy",
+        "Bekaboo/dropbar.nvim",
         event = "BufReadPost",
-        version = "*",
         dependencies = {
-            "SmiteshP/nvim-navic",
-            "nvim-tree/nvim-web-devicons", -- optional dependency
+            "nvim-tree/nvim-web-devicons",
         },
-        opts = {
-            -- configurations go here
-        },
+        opts = {},
     },
     -- blanklins
     {
