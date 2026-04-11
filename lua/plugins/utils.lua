@@ -69,7 +69,7 @@ return {
 			{
 				"<leader>qs",
 				function()
-					require("persistence").load()
+					require("persistence").select()
 				end,
 				desc = "Restore Session",
 			},

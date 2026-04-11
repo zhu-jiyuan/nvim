@@ -7,6 +7,7 @@ return {
 			{ "junegunn/fzf", build = "./install --bin" },
 			"trouble.nvim",
 		},
+        lazy = false,
 		cmd = "FzfLua",
 		keys = {
 			{ "<leader>ff", ":FzfLua files<CR>", desc = "find files" },
@@ -47,6 +48,8 @@ return {
 			local config = require("fzf-lua.config")
 			local actions = require("trouble.sources.fzf").actions
 			config.defaults.actions.files["alt-t"] = actions.open
+
+			fzf_lua.register_ui_select()
 
 			vim.api.nvim_create_user_command("Fd", function(opts)
 				local directory = opts.args
