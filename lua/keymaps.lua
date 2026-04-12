@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-local Runcode = require("runcode")
 local Helper = require("helper")
 
 -- opt args
@@ -31,8 +30,6 @@ map("n", " ", "<NOP>", opt)
 -- nvim-tree
 map("n", "<leader>e", ":Oil<CR>", opt)
 
--- run code
-map("n", "<F5>", Runcode.runcode, opt)
 
 -- change window wrap
 map("n", "<M-z>", Helper.change_window_wrap, opt)

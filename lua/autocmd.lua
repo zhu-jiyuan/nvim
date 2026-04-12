@@ -1,3 +1,11 @@
+vim.filetype.add({
+	pattern = {
+		[".*/templates/.*%.yaml"] = "helm",
+		[".*/templates/.*%.yml"] = "helm",
+		[".*/templates/.*%.tpl"] = "helm",
+	},
+})
+
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 -- 	pattern = "*",
 -- 	callback = function(args)

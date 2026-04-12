@@ -25,6 +25,7 @@ local ensure_installed_list = {
 	-- "buf_ls",
 	"protols",
 	"tailwindcss",
+    "helm_ls"
 	-- formatters
 	-- "isort",
 	-- "black",
