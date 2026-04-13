@@ -1,4 +1,4 @@
-local disable_filetypes = { c = true, cpp = true, lua = true, python = true }
+local disable_filetypes = { c = true, cpp = true, lua = true, python = true, json=true }
 
 return {
 	{

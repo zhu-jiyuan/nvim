@@ -126,6 +126,7 @@ return {
 		opts = {
 			progress = {
 				display = {
+					render_limit = 1,
 					progress_ttl = 15,
 				},
 				lsp = {
