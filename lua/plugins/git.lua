@@ -45,6 +45,13 @@ return {
 		cmd = "Git",
 	},
 	{
+		"NicholasZolton/neojj",
+		cmd = "Neojj",
+		keys = {
+			{ "<leader>gj", ":Neojj<CR>", desc = "Open Neojj" },
+		},
+	},
+	{
 		"NeogitOrg/neogit",
 		cmd = "Neogit",
 		dependencies = {
