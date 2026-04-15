@@ -3,6 +3,9 @@ vim.filetype.add({
 		[".*/templates/.*%.yaml"] = "helm",
 		[".*/templates/.*%.yml"] = "helm",
 		[".*/templates/.*%.tpl"] = "helm",
+		["helmfile%.yaml"] = "helm",
+		[".*/helmfile%.yaml"] = "helm",
+		[".*/helmfile%.d/.*%.yaml"] = "helm",
 	},
 })
 

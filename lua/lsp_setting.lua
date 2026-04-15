@@ -3,7 +3,9 @@ local ensure_installed_list = {
 
 	-- "pyright",
 	-- "basedpyright",
-	"ty",
+	-- "ty",
+    "zuban",
+    "zls",
 	"ruff",
 
 	"gopls",
