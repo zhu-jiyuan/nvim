@@ -73,6 +73,28 @@ return {
 				auto_show_console = false,
 				disable_commit_confirmation = true,
 				console_timeout = 10000,
+				status = {
+					HEAD_padding = 8,
+					mode_padding = 2,
+					mode_text = {
+						M = "● modified",
+						N = "+ new file",
+						A = "+ added",
+						D = "- deleted",
+						C = "· copied",
+						U = "! updated",
+						R = "→ renamed",
+						T = "● changed",
+						DD = "! unmerged",
+						AU = "! unmerged",
+						UD = "! unmerged",
+						UA = "! unmerged",
+						DU = "! unmerged",
+						AA = "! unmerged",
+						UU = "! unmerged",
+						["?"] = "",
+					},
+				},
 			})
 		end,
 	}

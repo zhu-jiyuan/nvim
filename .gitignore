@@ -4,3 +4,4 @@ lazy-lock.json
 .luarc.json
 local_plugins/
 .nvimlog
+CLAUDE.md

@@ -28,6 +28,7 @@ return {
 			{ "<leader>fj", ":FzfLua jumps<CR>", desc = "jumps" },
 			{ "<leader>fi", ":FzfLua lsp_implementations<CR>", desc = "lsp_implementations" },
 			{ "<leader>fr", ":FzfLua lsp_references<CR>", desc = "lsp_references" },
+			{ "<leader>ft", ":FzfLua colorschemes<CR>", desc = "switch colorscheme" },
 		},
 		config = function()
 			-- calling `setup` is optional for customization
