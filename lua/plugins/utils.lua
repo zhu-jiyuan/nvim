@@ -1,11 +1,27 @@
 return {
-	-- cmp pairs
+	-- cmp pairs (replaced by saghen/blink.pairs below)
+	-- {
+	-- 	"windwp/nvim-autopairs",
+	-- 	event = "InsertEnter",
+	-- 	-- dependencies = { "hrsh7th/nvim-cmp" },
+	-- 	opts = {}, -- this is equalent to setup({}) function
+	-- 	config = true,
+	-- },
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		-- dependencies = { "hrsh7th/nvim-cmp" },
-		opts = {}, -- this is equalent to setup({}) function
-		config = true,
+		"saghen/blink.pairs",
+		version = "*",
+		event = { "BufReadPost", "BufNewFile", "InsertEnter" },
+		dependencies = { "saghen/blink.download" },
+		---@module 'blink.pairs'
+		---@type blink.pairs.Config
+		opts = {
+			mappings = { enabled = true },
+			highlights = {
+				enabled = true,
+				groups = { "BlinkPairsOrange", "BlinkPairsPurple", "BlinkPairsBlue" },
+				matchparen = { enabled = true },
+			},
+		},
 	},
 	{
 		"smjonas/inc-rename.nvim",
