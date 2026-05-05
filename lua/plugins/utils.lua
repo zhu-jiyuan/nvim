@@ -141,16 +141,37 @@ return {
 		event = "LspAttach",
 		opts = {
 			progress = {
+				ignore_empty_message = true,
 				display = {
-					render_limit = 1,
-					progress_ttl = 15,
+					render_limit = 3,
+					done_ttl = 2,
+					done_icon = "✓",
+					done_style = "Comment",
+					progress_icon = { pattern = "dots_pulse", period = 1 },
+					progress_style = "WarningMsg",
+					group_style = "Title",
+					icon_style = "Question",
+					format_message = function(msg)
+						local message = msg.message or ""
+						if msg.percentage ~= nil then
+							message = string.format("%s (%.0f%%)", message, msg.percentage)
+						end
+						return message
+					end,
 				},
 				lsp = {
 					progress_ringbuf_size = 512,
 				},
 			},
 			notification = {
-				window = { winblend = 0 },
+				window = {
+					winblend = 0,
+					border = "rounded",
+					x_padding = 1,
+					y_padding = 0,
+					align = "bottom",
+					relative = "win",
+				},
 			},
 		},
 	},
