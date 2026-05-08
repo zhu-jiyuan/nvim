@@ -23,7 +23,30 @@ return {
 			{ "<leader>gb", ":FzfLua git_branches<CR>", desc = "git branch" },
 			{ "<leader>f?", ":FzfLua builtin<CR>", desc = "fzf builtin" },
 			{ "<leader>fc", ":FzfLua command_history<CR>", desc = "command_history" },
-			{ "<leader>fz", ":FzfLua zoxide<CR>", desc = "command_history" },
+			{
+				"<leader>fz",
+				function()
+					local function path_of(selected)
+						return selected[1]:match("[^%s]+$")
+					end
+					require("fzf-lua").zoxide({
+						actions = {
+							["default"] = function(selected)
+								local dir = path_of(selected)
+								vim.cmd.tcd(dir)
+								require("oil").open(dir)
+							end,
+							["ctrl-t"] = function(selected)
+								local dir = path_of(selected)
+								vim.cmd.tabnew()
+								vim.cmd.tcd(dir)
+								require("oil").open(dir)
+							end,
+						},
+					})
+				end,
+				desc = "recent projects",
+			},
 			{ "<leader>fm", ":FzfLua marks<CR>", desc = "marks" },
 			{ "<leader>fj", ":FzfLua jumps<CR>", desc = "jumps" },
 			{ "<leader>fi", ":FzfLua lsp_implementations<CR>", desc = "lsp_implementations" },
