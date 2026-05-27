@@ -1,6 +1,6 @@
 return {
 	{
-		'zhu-jiyuan/oil.nvim',
+		'stevearc/oil.nvim',
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		lazy = false,
