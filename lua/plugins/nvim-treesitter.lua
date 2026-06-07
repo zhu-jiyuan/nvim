@@ -49,7 +49,7 @@ return {
 				"vimdoc",
 				"yaml",
 				"zsh"
-			})
+			}, { max_jobs = 4 })
 			vim.treesitter.language.register("groovy", {"jenkinsfile", "Jenkinsfile"})
 		end
 	},
