@@ -11,11 +11,14 @@ return {
 		"saghen/blink.pairs",
 		version = "*",
 		event = { "BufReadPost", "BufNewFile", "InsertEnter" },
-		dependencies = { "saghen/blink.download" },
+        dependencies = 'saghen/blink.lib',
+        build = function()
+            require('blink.pairs').download():pwait(60000)
+        end,
 		---@module 'blink.pairs'
 		---@type blink.pairs.Config
 		opts = {
-			mappings = { enabled = true },
+			mappings = { enabled = true, cmdline=true },
 			highlights = {
 				enabled = true,
 				groups = { "BlinkPairsOrange", "BlinkPairsPurple", "BlinkPairsBlue" },
