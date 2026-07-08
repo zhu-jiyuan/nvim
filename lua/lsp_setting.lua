@@ -11,7 +11,7 @@ local ensure_installed_list = {
 	"gopls",
 	"clangd",
 	-- "csharp_ls",
-	"ts_ls",
+	"tsgo",
 	"rust_analyzer",
 
 	-- web dev
