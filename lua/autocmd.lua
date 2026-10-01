@@ -71,15 +71,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
-
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-	desc = 'Enable foldcolumn for normal files',
-	pattern = 'buftype',
-	callback = function()
-		if vim.bo.buftype == '' then
-			vim.wo.foldcolumn = '1'
-		else
-			vim.wo.foldcolumn = '0'
-		end
-	end,
-})

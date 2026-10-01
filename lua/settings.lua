@@ -108,7 +108,7 @@ option.wildmenu = true
 -- opt.shortmess = vim.o.shortmess .. "c"
 
 -- 代码折叠
-option.foldcolumn = '1'
+option.foldcolumn = '0'
 option.foldlevel = 99
 option.foldlevelstart = 99
 
