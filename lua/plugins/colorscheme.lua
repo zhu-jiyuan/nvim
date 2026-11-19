@@ -47,7 +47,7 @@ return {
             require("everforest").setup({
                 -- Your config here
 				background = "soft",
-
+				transparent_background_level = 2,
             })
             vim.cmd([[colorscheme everforest]])
             -- Set a readable cursor color (dark cursor on light theme)
