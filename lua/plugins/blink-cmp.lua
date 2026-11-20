@@ -3,57 +3,35 @@ local border = custom.borders[custom.border]
 
 return {
 	{
-		'saghen/blink.cmp',
+		"saghen/blink.cmp",
 		name = "blink_cmp",
-		-- dev = true,
-		-- optional: provides snippets for the snippet source
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
-			'rafamadriz/friendly-snippets',
-			-- {
-			-- 	'L3MON4D3/LuaSnip',
-			-- 	dependencies = { "rafamadriz/friendly-snippets" },
-			-- 	version = 'v2.*',
-			-- 	build = "make install_jsregexp",
-			-- 	config = function()
-			-- 		require("luasnip.loaders.from_vscode").lazy_load()
-			-- 		require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/snippets" } })
-			-- 	end
-			-- }
+			"rafamadriz/friendly-snippets",
 		},
 
-		-- use a release tag to download pre-built binaries
-		version = '1.*',
+		-- A release tag downloads the pre-built fuzzy matcher binary.
+		version = "1.*",
 
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-			-- 'super-tab' for mappings similar to vscode (tab to accept)
-			-- 'enter' for enter to accept
-			-- 'none' for no mappings
-			--
-			-- All presets have the following mappings:
-			-- C-space: Open menu or open docs if already open
-			-- C-n/C-p or Up/Down: Select next/previous item
-			-- C-e: Hide menu
-			-- C-k: Toggle signature help (if signature.enabled = true)
-			--
-			-- See :h blink-cmp-config-keymap for defining your own keymap
 			keymap = {
-				preset = 'enter',
+				preset = "enter",
 
-				['<C-s>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
-				['<C-Enter>'] = { 'show', 'show_documentation', 'hide_documentation' },
+				["<C-s>"] = {
+					function(cmp)
+						cmp.show({ providers = { "snippets" } })
+					end,
+				},
+				["<C-Enter>"] = { "show", "show_documentation", "hide_documentation" },
 			},
 			signature = { enabled = true, window = { border = border } },
 
 			appearance = {
-				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-				-- Adjusts spacing to ensure icons are aligned
-				nerd_font_variant = 'mono'
+				nerd_font_variant = "mono",
 			},
 
-			-- (Default) Only show the documentation popup when manually triggered
 			completion = {
 				documentation = {
 					auto_show = true,
@@ -71,65 +49,53 @@ return {
 					border = border,
 					draw = {
 						columns = {
-							{ "label",     "label_description", gap = 1 },
-							{ "kind_icon", "kind",              gap = 1 },
-							-- { "source_name", gap = 1 }
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind", gap = 1 },
 						},
-					}
+					},
 				},
 			},
 
-			-- snippets
-			snippets = { preset = 'default' },
+			snippets = { preset = "default" },
 			cmdline = {
 				enabled = true,
 				keymap = {
-					preset = 'inherit',
-					['<Tab>'] = { 'show', 'accept' },
-					['<CR>'] = { 'accept_and_enter', 'fallback' }
+					preset = "inherit",
+					["<Tab>"] = { "show", "accept" },
+					["<CR>"] = { "accept_and_enter", "fallback" },
 				},
-
-				-- keymap = {
-				-- 	-- recommended, as the default keymap will only show and select the next item
-				-- },
-				-- completion = { menu = { auto_show = true } }
-
-
 				completion = {
 					menu = {
-						auto_show = function(ctx)
-							return vim.fn.getcmdtype() == ':'
-
-							-- enable for inputs as well, with:
-							-- or vim.fn.getcmdtype() == '@'
+						auto_show = function()
+							return vim.fn.getcmdtype() == ":"
 						end,
 					},
-				}
+				},
 			},
 
-
-			-- Default list of enabled providers defined so that you can extend it
-			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { 'lsp', 'buffer', 'snippets', 'path' },
+				default = { "lsp", "buffer", "snippets", "path" },
+				per_filetype = {
+					sql = { inherit_defaults = true, "dadbod" },
+					mysql = { inherit_defaults = true, "dadbod" },
+					plsql = { inherit_defaults = true, "dadbod" },
+				},
 				providers = {
+					dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 					cmdline = {
 						min_keyword_length = function(ctx)
 							-- when typing a command, only show when the keyword is 3 characters or longer
-							if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+							if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
+								return 3
+							end
 							return 0
-						end
-					}
-				}
+						end,
+					},
+				},
 			},
 
-			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-			--
-			-- See the fuzzy documentation for more information
-			fuzzy = { implementation = "prefer_rust_with_warning" }
+			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
-		opts_extend = { "sources.default" }
-	}
+		opts_extend = { "sources.default" },
+	},
 }

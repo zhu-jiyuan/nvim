@@ -1,7 +1,3 @@
-local lazy_status = require("lazy.status")
-local custom = require("custom")
-
-
 local function modified()
 	if vim.bo.modified then
 		return " "
@@ -94,6 +90,7 @@ local function jj_fetch()
 	local result = vim.system({
 		"jj",
 		"--no-pager",
+		"--ignore-working-copy",
 		"log",
 		"--no-graph",
 		"-r",
@@ -136,8 +133,7 @@ local git_root_cache = {}
 local function is_git_repo()
 	local dir = context_dir()
 	if git_root_cache[dir] == nil then
-		git_root_cache[dir] = (vim.fn.finddir(".git", dir .. ";") ~= "")
-			or (vim.fn.findfile(".git", dir .. ";") ~= "")
+		git_root_cache[dir] = (vim.fn.finddir(".git", dir .. ";") ~= "") or (vim.fn.findfile(".git", dir .. ";") ~= "")
 	end
 	return git_root_cache[dir]
 end
@@ -151,7 +147,11 @@ local function git_branch()
 		return entry.value
 	end
 	local result = vim.system({
-		"git", "-C", dir, "branch", "--show-current",
+		"git",
+		"-C",
+		dir,
+		"branch",
+		"--show-current",
 	}, { text = true }):wait()
 	local value = ""
 	if result.code == 0 then
@@ -161,58 +161,10 @@ local function git_branch()
 	return value
 end
 
-local function get_copilot()
-	local client = vim.lsp.get_clients({ name = "copilot" })[1]
-	if not client then
-		return " "
-	end
-	return " "
-end
-
--- local bufline = {
---     lualine_a = {
---         {
---             "buffers",
---             cond = function()
---                 return vim.bo.filetype ~= "alpha"
---             end,
---             mode = 2,
---             section_separators = { left = "", right = "" },
---             use_mode_colors = true,
---             filetype_names = {
---                 TelescopePrompt = " Telescope",
---                 fzf = " FZF",
---                 alpha = "󰏘 Alpha",
---                 minifiles = " Mini.Files",
---                 toggleterm = "ToggleTerm",
---                 checkhealth = "󰄳 Checkhelth",
---                 oil = " Oil",
---                 Outline = "󰇽 Outline",
---                 lazy = "󰜢 Lazy",
---                 Mundo = " Mundo",
---                 MundoDiff = " MundoDiff",
---                 CompetiTest = " CompetiTest",
---                 lspinfo = " LspInfo",
---             },
---             symbols = {
---                 modified = " ●",
---                 alternate_file = "",
---                 directory = "󰉋",
---             },
---         },
---     },
---     lualine_z = {},
--- }
-
 local opts = {
 	options = {
 		icons_enabled = true,
-		-- theme = "everforest",
-		disabled_filetypes = {
-			"alpha",
-			"TelescopePrompt",
-			"mason",
-		},
+		disabled_filetypes = { "mason" },
 		always_divide_middle = true,
 		globalstatus = true,
 		component_separators = { left = "", right = "" },
@@ -264,26 +216,12 @@ local opts = {
 				padding = { left = 1, right = 0 },
 			},
 			{
-				'filename',
-				file_status = false, -- Displays file status (readonly status, modified status)
-				path = 1,            -- 0: Just the filename
-				-- 1: Relative path
-				-- 2: Absolute path
-				-- 3: Absolute path, with tilde as the home directory
-				-- 4: Filename and parent dir, with tilde as the home directory
-
-				shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-				-- for other components. (terrible name, any suggestions?)
+				"filename",
+				file_status = false,
+				path = 1, -- relative path
+				shorting_target = 40,
 			},
-			{
-				"diagnostics"
-				-- symbols = {
-				-- 	error = custom.symbol.error,
-				-- 	warn = custom.symbol.warn,
-				-- 	info = custom.symbol.info,
-				-- 	hint = custom.symbol.hint,
-				-- },
-			},
+			"diagnostics",
 			readonly,
 		},
 		lualine_x = {
@@ -298,24 +236,15 @@ local opts = {
 					removed = " ",
 				},
 			},
-			{
-				lazy_status.updates,
-				cond = lazy_status.has_updates,
-				color = { fg = "#ff9e64" },
-			},
 			recording,
 			{
 				get_lsp_text,
-				"lsp_status",
-				icon = ' LSP:',
-				color = { fg = '#fff9e64', gui = 'bold' },
+				icon = " LSP:",
+				color = { fg = "#ff9e64", gui = "bold" },
 			},
 		},
 		lualine_y = {
-			{
-				"encoding",
-				right_padding = 2,
-			},
+			"encoding",
 		},
 		lualine_z = {
 			{
@@ -341,14 +270,11 @@ local opts = {
 			},
 		},
 	},
-	-- tabline = bufline,
 	extensions = {
 		-- "oil" intentionally omitted: we want the default statusline (with
 		-- branch / jj / diff) to render in oil buffers too.
 		"man",
 		"quickfix",
-		"neo-tree",
-		"symbols-outline",
 		"mason",
 		"lazy",
 		"trouble",
@@ -364,7 +290,6 @@ return {
 	end,
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons" },
-		-- { "ofseed/copilot-status.nvim" },
 	},
 	config = function()
 		require("lualine").setup(opts)

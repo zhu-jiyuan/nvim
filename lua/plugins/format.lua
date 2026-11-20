@@ -9,19 +9,28 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = "BufReadPost",
+		keys = {
+			{
+				"<leader>M",
+				function()
+					require("conform").format({ async = true, lsp_format = "fallback" })
+				end,
+				desc = "Format current buffer",
+			},
+		},
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
-					lua             = { "lua_ls" },
-					python          = { "ruff" },
-					css             = { "biome" },
-					javascript      = { "biome" },
+					lua = { "stylua" },
+					python = { "ruff_fix", "ruff_format" },
+					css = { "biome" },
+					javascript = { "biome" },
 					javascriptreact = { "biome" },
-					typescript      = { "biome" },
+					typescript = { "biome" },
 					typescriptreact = { "biome" },
-					json            = { "biome" },
-					jsonc           = { "biome" },
-					html            = { "prettier" },
+					json = { "biome" },
+					jsonc = { "biome" },
+					html = { "prettier" },
 				},
 				format_after_save = function(bufnr)
 					if not format_on_save_filetypes[vim.bo[bufnr].filetype] then

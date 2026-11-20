@@ -1,12 +1,14 @@
 return {
 	{
 		"Saecki/crates.nvim",
-		categories = { "lang", "rust" },
 		event = { "BufRead Cargo.toml" },
 		opts = {
-			completion = {
-				cmp = { enabled = true },
+			lsp = {
+				enabled = true,
+				actions = true,
+				completion = true,
+				hover = true,
 			},
 		},
-	}
+	},
 }

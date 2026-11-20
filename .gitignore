@@ -1,6 +1,5 @@
 .DS_Store
 lua/.DS_Store
-lazy-lock.json
 .luarc.json
 local_plugins/
 .nvimlog

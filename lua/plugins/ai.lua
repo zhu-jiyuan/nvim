@@ -4,25 +4,36 @@ return {
 		cmd = "Copilot",
 		event = "InsertEnter",
 		dependencies = {
-			"copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+			{
+				"copilotlsp-nvim/copilot-lsp",
+				init = function()
+					vim.g.copilot_nes_debounce = 500
+				end,
+			},
 		},
-		config = function()
-			require("copilot").setup({
-				suggestion = {
-					enabled = true,
-					auto_trigger = true,
-					auto_refresh = true,
-					debounce = 75,
-					keymap = {
-						accept_word = false,
-						accept_line = false,
-						next = "<M-]>",
-						prev = "<M-[>",
-						accept = "<C-y>"
-					},
+		opts = {
+			suggestion = {
+				enabled = true,
+				auto_trigger = true,
+				auto_refresh = true,
+				debounce = 75,
+				keymap = {
+					accept_word = false,
+					accept_line = false,
+					next = "<M-]>",
+					prev = "<M-[>",
+					accept = "<C-y>",
 				},
-			})
-			vim.g.copilot_nes_debounce = 500
-		end,
+			},
+			nes = {
+				enabled = true,
+				auto_trigger = true,
+				keymap = {
+					accept_and_goto = "<Tab>",
+					accept = false,
+					dismiss = "<Esc>",
+				},
+			},
+		},
 	},
 }

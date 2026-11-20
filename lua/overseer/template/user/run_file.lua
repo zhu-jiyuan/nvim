@@ -1,5 +1,5 @@
 local runners = {
-	lua = { "lua" },
+	lua = { "nvim", "-l" },
 	python = { "uv", "run" },
 	go = { "go", "run" },
 	typescript = { "bun", "run" },

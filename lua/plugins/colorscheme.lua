@@ -1,16 +1,12 @@
 return {
-    -- theme
-    {
-        "neanias/everforest-nvim",
-        version = false,
-        lazy = false,
-		enable = true,
-        priority = 1000, -- make sure to load this before all the other start plugins
-        -- Optional; default configuration will be used if setup isn't called.
-        config = function()
-            vim.opt.background = "light"
-            require("everforest").setup({
-                -- Your config here
+	{
+		"neanias/everforest-nvim",
+		version = false,
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.opt.background = "light"
+			require("everforest").setup({
 				background = "soft",
 				transparent_background_level = 2,
 				-- Floats are cards on Ghostty's notebook paper: a neutral fill a shade darker than the paper, which
@@ -29,17 +25,17 @@ return {
 					hl.BlinkCmpSignatureHelpBorder = { link = "FloatBorder" }
 					hl.BlinkCmpDocSeparator = { link = "FloatBorder" }
 				end,
-            })
-            vim.cmd([[colorscheme everforest]])
-        end,
-    },
-    -- winbar breadcrumbs
-    {
-        "Bekaboo/dropbar.nvim",
-        event = "BufReadPost",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        opts = {},
-    },
+			})
+			vim.cmd([[colorscheme everforest]])
+		end,
+	},
+	-- winbar breadcrumbs
+	{
+		"Bekaboo/dropbar.nvim",
+		event = "BufReadPost",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {},
+	},
 }

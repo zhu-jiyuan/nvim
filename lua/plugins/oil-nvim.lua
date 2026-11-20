@@ -1,6 +1,6 @@
 return {
 	{
-		'zhu-jiyuan/oil.nvim',
+		"zhu-jiyuan/oil.nvim",
 		-- Optional dependencies
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		lazy = false,
@@ -9,7 +9,7 @@ return {
 			delete_to_trash = true,
 			skip_confirm_for_simple_edits = true,
 			prompt_save_on_select_new_entry = false,
-			experimental_watch_for_changes = true,
+			watch_for_changes = true,
 			use_default_keymaps = false,
 			win_options = {
 				concealcursor = "n",
@@ -28,7 +28,7 @@ return {
 				["<C-t>"] = "actions.select_tab",
 				["<C-p>"] = "actions.preview",
 				["<C-c>"] = "actions.close",
-				['<BS>'] = 'actions.parent',
+				["<BS>"] = "actions.parent",
 				["<C-l>"] = false,
 				["<C-j>"] = false,
 				["<C-k>"] = false,
@@ -42,30 +42,28 @@ return {
 				["g."] = "actions.toggle_hidden",
 				["g\\"] = "actions.toggle_trash",
 				["gd"] = {
-					desc = 'Toggle [D]etail view',
+					desc = "Toggle [D]etail view",
 					callback = function()
-						local oil = require('oil')
-						local config = require('oil.config')
+						local oil = require("oil")
+						local config = require("oil.config")
 						if #config.columns == 1 then
-							oil.set_columns({ 'permissions', 'size', 'mtime', 'icon' })
+							oil.set_columns({ "icon", "permissions", "size", "mtime" })
 						else
-							oil.set_columns({ 'icon' })
+							oil.set_columns({ "icon" })
 						end
 					end,
 				},
-
 			},
 			view_options = {
 				show_hidden = true,
 				is_always_hidden = function(name)
-					return name == '..'
+					return name == ".."
 				end,
 			},
-
 		},
 		config = function(_, opts)
 			require("oil").setup(opts)
 			vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-		end
-	}
+		end,
+	},
 }

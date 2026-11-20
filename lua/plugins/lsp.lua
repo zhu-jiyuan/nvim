@@ -1,33 +1,18 @@
 local custom = require("custom")
 
-local LspSetting = require("lsp_setting")
-
-local on_attach = LspSetting.lsp_on_attach
 return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 		dependencies = {
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-		},
-		opts = {
-			capabilities = {
-				workspace = {
-					didChangeWatchedFiles = {
-						dynamicRegistration = true,
-					},
-				},
-			},
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
+			-- blink.cmp registers its completion capabilities on load; that has to happen before a server starts.
+			"blink_cmp",
 		},
 		config = function()
-			-- vim.diagnostic.config({
-			-- 	virtual_text = false
-			-- })
 			vim.diagnostic.config({
 				virtual_text = true,
-				-- update_in_insert = true,
 				float = {
 					focusable = false,
 					style = "minimal",
@@ -38,9 +23,6 @@ return {
 				},
 			})
 
-			require("neoconf").setup({
-				-- override any of the default settings here
-			})
 			require("mason").setup({
 				ui = {
 					icons = {
@@ -51,14 +33,7 @@ return {
 				},
 			})
 
-			require("mason-lspconfig").setup({
-				-- ensure_installed = LspSetting.ensure_installed_list,
-			})
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			vim.lsp.config("*", {
-				capabilities = capabilities,
-				on_attach = on_attach,
-			})
+			require("mason-lspconfig").setup({})
 		end,
 	},
 }

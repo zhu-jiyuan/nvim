@@ -1,29 +1,21 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
 		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
+		"--branch=stable",
 		lazypath,
 	})
 end
-vim.g.lazydev_enabled = true -- 开启lazydev
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(
-	{
-		spec = {
-			-- import your plugins
-			{ import = "plugins" },
-		},
-		-- Configure any other settings here. See the documentation for more details.
-		-- colorscheme that will be used when installing plugins.
-		-- automatically check for plugin updates
-		-- checker = { enabled = true },
-		change_detection = { notify = false },
-		defaults = { lazy = true },
-	}
-)
+require("lazy").setup({
+	spec = {
+		{ import = "plugins" },
+	},
+	change_detection = { notify = false },
+	defaults = { lazy = true },
+})

@@ -1,16 +1,12 @@
 local ensure_installed_list = {
 	"lua_ls",
 
-	-- "pyright",
-	-- "basedpyright",
-	-- "ty",
-    "zuban",
-    "zls",
+	"zuban",
+	"zls",
 	"ruff",
 
 	"gopls",
 	"clangd",
-	-- "csharp_ls",
 	"tsc",
 	"rust_analyzer",
 
@@ -19,31 +15,16 @@ local ensure_installed_list = {
 	"cssls",
 	"html",
 	"postgres_lsp",
-	-- "sqlls",
 
-	--config
+	-- config
 	"yamlls",
 	"jsonls",
-	-- "buf_ls",
 	"protols",
 	"tailwindcss",
-    "helm_ls"
-	-- formatters
-	-- "isort",
-	-- "black",
-	-- "prettier",
-	-- "codespell",
-
-	-- "ruff"
+	"helm_ls",
 }
 
 local lsp_on_attach = function(_, bufnr)
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -51,29 +32,16 @@ local lsp_on_attach = function(_, bufnr)
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	end
 
-	-- nmap("<leader>rn", function()
-	-- 	vim.lsp.buf.rename()
-	-- end, "[R]e[n]ame")
-	-- nmap("<leader>ca", function()
-	-- 	vim.lsp.buf.code_action()
-	-- end, "[C]ode [A]ction")
-
-	nmap("<leader>rn", function()
-		vim.lsp.buf.rename()
-	end, "Rename")
-	-- nmap("<leader>ot", "<cmd>Lspsaga outline<CR>", "OutLine")
-
+	-- Same keys as Neovim's built-in LSP maps (grr, gra, gri, grt, gO), with fzf-lua as the picker.
+	-- grn (rename) and grx (codelens) stay built-in.
 	local fzf_lua = require("fzf-lua")
-	nmap("<leader>ca", function()
-		fzf_lua.lsp_code_actions()
-	end, "Code Action")
-	nmap("gd", fzf_lua.lsp_definitions, "[G]oto [D]efinition")
-	nmap("gr", fzf_lua.lsp_references, "[G]oto [R]eferences")
-	nmap("gI", fzf_lua.lsp_implementations, "[G]oto [I]mplementation")
-	nmap("<leader>pd", fzf_lua.lsp_typedefs, "Type [D]efinition")
-	nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
+	nmap("gd", fzf_lua.lsp_definitions, "Definition")
+	nmap("grr", fzf_lua.lsp_references, "References")
+	nmap("gri", fzf_lua.lsp_implementations, "Implementation")
+	nmap("grt", fzf_lua.lsp_typedefs, "Type definition")
+	nmap("gO", fzf_lua.lsp_document_symbols, "Document symbols")
+	vim.keymap.set({ "n", "x" }, "gra", fzf_lua.lsp_code_actions, { buffer = bufnr, desc = "LSP: Code action" })
 	nmap("<leader>ws", fzf_lua.lsp_live_workspace_symbols, "[W]orkspace [S]ymbols")
-	-- See `:help K` for why this keymap
 	nmap("<leader>K", function()
 		vim.lsp.buf.hover()
 	end, "Hover Documentation")
@@ -81,21 +49,12 @@ local lsp_on_attach = function(_, bufnr)
 	nmap("<leader>h", vim.lsp.buf.signature_help, "Signature Documentation")
 	vim.keymap.set("i", "<C-H>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature Documentation" })
 
-	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
 	nmap("<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "[W]orkspace [L]ist Folders")
-
-	-- Create a command `:Format` local to the LSP buffer
-	nmap("<leader>M", function()
-		require("conform").format({ async = true, lsp_fallback = true })
-	end, "Format current buffer")
-
-	-- lsp diagnostics
-	nmap("<leader>da", fzf_lua.lsp_workspace_diagnostics, "lsp diagnosticls")
 end
 
 return {

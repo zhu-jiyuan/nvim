@@ -1,11 +1,13 @@
 local function run_custom_cmd()
 	vim.ui.input({ prompt = "Shell command: " }, function(cmd)
 		if cmd and cmd ~= "" then
-			require("overseer").new_task({
-				name = cmd,
-				cmd = cmd,
-				cwd = vim.fn.expand("%:p:h"),
-			}):start()
+			require("overseer")
+				.new_task({
+					name = cmd,
+					cmd = cmd,
+					cwd = vim.fn.expand("%:p:h"),
+				})
+				:start()
 		end
 	end)
 end
@@ -47,10 +49,8 @@ return {
 		{ "<leader>rh", run_history, desc = "Run History (fzf)" },
 	},
 	opts = {
-		strategy = "toggleterm",
 		task_list = {
 			direction = "bottom",
 		},
-		default_template_prompt = "never",
 	},
 }

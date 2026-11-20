@@ -1,24 +1,21 @@
-local map = vim.keymap.set
 return {
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
+			"nvim-treesitter/nvim-treesitter",
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-python",
-			"mrcjkb/rustaceanvim",
-
 		},
-		cmd = { "Neotest", "NeotestRun", "NeotestSummary", "NeotestOutput" },
+		cmd = "Neotest",
 		keys = {
 			{
 				"<leader>tl",
 				function()
 					require("neotest").run.run()
 				end,
-				desc = "Run nearest test"
+				desc = "Run nearest test",
 			},
 
 			{
@@ -26,7 +23,7 @@ return {
 				function()
 					require("neotest").run.run(vim.fn.expand("%"))
 				end,
-				desc = "Run tests in current file"
+				desc = "Run tests in current file",
 			},
 
 			{
@@ -34,7 +31,7 @@ return {
 				function()
 					require("neotest").summary.toggle()
 				end,
-				desc = "Toggle test results summary"
+				desc = "Toggle test results summary",
 			},
 
 			{
@@ -42,7 +39,7 @@ return {
 				function()
 					require("neotest").run.stop()
 				end,
-				desc = "Stop test"
+				desc = "Stop test",
 			},
 
 			{
@@ -50,7 +47,7 @@ return {
 				function()
 					require("neotest").run.attach()
 				end,
-				desc = "Attach to test"
+				desc = "Attach to test",
 			},
 
 			{
@@ -58,7 +55,7 @@ return {
 				function()
 					require("neotest").output.open({ enter = true })
 				end,
-				desc = "Open test output"
+				desc = "Open test output",
 			},
 
 			{
@@ -66,28 +63,18 @@ return {
 				function()
 					require("neotest").output_panel.toggle()
 				end,
-				desc = "Toggle test output panel"
-			},
-
-			{
-				"<leader>td",
-				function()
-					require("neotest").run.run({ strategy = "dap" })
-				end,
-				desc = "Run nearest test"
+				desc = "Toggle test output panel",
 			},
 		},
-		config = function ()
+		config = function()
 			local neotest = require("neotest")
 			neotest.setup({
 				adapters = {
 					require("neotest-python")({
-						dap = { justMyCode = false },
 						runner = "pytest",
-						args = { "--log-level", "DEBUG" , "-vv", "-s"},
+						args = { "--log-level", "DEBUG", "-vv", "-s" },
 					}),
 					require("neotest-plenary"),
-					require('rustaceanvim.neotest'),
 				},
 				status = {
 					enabled = true,
@@ -98,7 +85,6 @@ return {
 					open_on_run = true,
 				},
 			})
-			
-		end
-	}
+		end,
+	},
 }

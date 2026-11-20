@@ -1,24 +1,16 @@
 return {
-	-- cmp pairs (replaced by saghen/blink.pairs below)
-	-- {
-	-- 	"windwp/nvim-autopairs",
-	-- 	event = "InsertEnter",
-	-- 	-- dependencies = { "hrsh7th/nvim-cmp" },
-	-- 	opts = {}, -- this is equalent to setup({}) function
-	-- 	config = true,
-	-- },
 	{
 		"saghen/blink.pairs",
 		version = "*",
 		event = { "BufReadPost", "BufNewFile", "InsertEnter" },
-        dependencies = 'saghen/blink.lib',
-        build = function()
-            require('blink.pairs').download():pwait(60000)
-        end,
+		dependencies = "saghen/blink.lib",
+		build = function()
+			require("blink.pairs").download():pwait(60000)
+		end,
 		---@module 'blink.pairs'
 		---@type blink.pairs.Config
 		opts = {
-			mappings = { enabled = true, cmdline=true },
+			mappings = { enabled = true, cmdline = true },
 			highlights = {
 				enabled = true,
 				groups = { "BlinkPairsOrange", "BlinkPairsPurple", "BlinkPairsBlue" },
@@ -27,58 +19,27 @@ return {
 		},
 	},
 	{
-		"smjonas/inc-rename.nvim",
+		"windwp/nvim-ts-autotag",
 		event = "BufReadPre",
+		opts = {
+			opts = {
+				enable_close = false,
+				enable_rename = true,
+				enable_close_on_slash = true,
+			},
+		},
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
 		opts = {},
 	},
 	{
-		"windwp/nvim-ts-autotag",
-
-		event = "BufReadPre",
-		config = function()
-			require('nvim-ts-autotag').setup({
-				opts = {
-
-					enable_close = false, -- Auto close tags
-					enable_rename = true, -- Auto rename pairs of tags
-					enable_close_on_slash = true -- Auto close on trailing </
-				},
-				-- Also override individual filetype configs, these take priority.
-				-- Empty by default, useful if one of the "opts" global settings
-				-- doesn't work well in a specific filetype
-				--[[ per_filetype = {
-            ["html"] = {
-              enable_close = false
-            }
-          } ]]
-
-			})
-		end
-
-	},
-	-- tip key
-	{
-		"folke/which-key.nvim",
-		event = "BufReadPre",
-		-- event = "VimEnter",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 1000
-		end,
-		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
-	},
-	{
 		"folke/persistence.nvim",
-		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		-- Session saving only starts once an actual file was opened.
+		event = "BufReadPre",
 		cmd = "RestoreSession",
-		opts = {
-			-- add any custom options here
-			--
-		},
+		opts = {},
 		init = function()
 			vim.api.nvim_create_user_command("RestoreSession", function()
 				require("persistence").load()
@@ -108,10 +69,6 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"LunarVim/bigfile.nvim",
-	-- 	event = "BufReadPre", -- this will only start session saving when an actual file was opened
-	-- },
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
@@ -122,22 +79,18 @@ return {
 			"TmuxNavigatePrevious",
 		},
 		keys = {
-			{ "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-			{ "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-			{ "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-			{ "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
 	{
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = "InsertEnter",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end
+		version = "*",
+		event = "VeryLazy",
+		opts = {},
 	},
 	{
 		"j-hui/fidget.nvim",
@@ -207,42 +160,8 @@ return {
 		end,
 	},
 	{
-		'mcauley-penney/visual-whitespace.nvim',
-		config = true,
-		event = "ModeChanged *:[vV\22]", -- optionally, lazy load on entering visual mode
+		"mcauley-penney/visual-whitespace.nvim",
+		event = "ModeChanged *:[vV\22]",
 		opts = {},
-	}
-	-- {
-	--     "nosduco/remote-sshfs.nvim",
-	--     dependencies = "nvim-telescope/telescope.nvim",
-	--     cmd = { "RemoteSSHFSConnect" },
-	--     opts = {},
-	-- },
-
-
-	-- install without yarn or npm
-	-- web markdown preview.
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	-- 	ft = { "markdown" },
-	-- 	build = function() vim.fn["mkdp#util#install"]() end,
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>mp",
-	-- 			ft = "markdown",
-	-- 			"<cmd>MarkdownPreviewToggle<cr>",
-	-- 			desc = "Markdown Preview",
-	-- 		},
-	-- 	},
-	-- }
-
-	-- nvim 0.10 is support this plugin.
-	-- {
-	--     'numToStr/Comment.nvim',
-	--     opts = {
-	--         -- add any options here
-	--     },
-	--     lazy = false,
-	-- }
+	},
 }

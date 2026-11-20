@@ -1,12 +1,11 @@
 return {
 	{
-		'nvim-treesitter/nvim-treesitter',
-		branch = 'main',
-		event = 'VeryLazy',
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		lazy = false,
-		build = ':TSUpdate',
+		build = ":TSUpdate",
 		config = function()
-			local ts = require('nvim-treesitter')
+			local ts = require("nvim-treesitter")
 			ts.install({
 				"bash",
 				"c",
@@ -47,28 +46,19 @@ return {
 				"vim",
 				"vimdoc",
 				"yaml",
-				"zsh"
+				"zsh",
 			}, { max_jobs = 4 })
-			vim.treesitter.language.register("groovy", {"jenkinsfile", "Jenkinsfile"})
-		end
+		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter-textobjects',
-		dependencies = { 'nvim-treesitter/nvim-treesitter', branch = 'main' },
-		event = 'VeryLazy',
-		branch = 'main',
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter", branch = "main" },
+		event = "VeryLazy",
+		branch = "main",
 		config = function()
-			require('nvim-treesitter-textobjects').setup {
+			require("nvim-treesitter-textobjects").setup({
 				select = {
-					enable = true,
 					lookahead = true,
-					keymaps = {
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						-- ["ac"] = "@class.outer",
-						-- ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-						-- ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-					},
 					selection_modes = {
 						["@parameter.outer"] = "v", -- charwise
 						["@function.outer"] = "V", -- linewise
@@ -77,124 +67,71 @@ return {
 					include_surrounding_whitespace = true,
 				},
 				move = {
-					enable = true,
 					set_jumps = true,
-				}
-			}
+				},
+			})
 			local mapset = vim.keymap.set
-			local move = require('nvim-treesitter-textobjects.move')
-			mapset({ "n", "x", "o" }, "]a", function()
-				move.goto_next_start({ '@parameter.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[a", function()
-				move.goto_previous_start({ '@parameter.outer' })
-			end)
+			local move = require("nvim-treesitter-textobjects.move")
+			local modes = { "n", "x", "o" }
 
-			mapset({ "n", "x", "o" }, "]f", function()
-				move.goto_next_start({ '@function.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[f", function()
-				move.goto_previous_start({ '@function.outer' })
-			end)
+			-- ]x / [x jump to the next / previous start, ]X / [X to the next / previous end.
+			local targets = {
+				a = "@parameter.outer",
+				f = "@function.outer",
+				c = "@class.outer",
+				j = "@conditional.outer",
+				l = "@loop.outer",
+			}
+			for key, query in pairs(targets) do
+				mapset(modes, "]" .. key, function()
+					move.goto_next_start(query)
+				end)
+				mapset(modes, "[" .. key, function()
+					move.goto_previous_start(query)
+				end)
+				mapset(modes, "]" .. key:upper(), function()
+					move.goto_next_end(query)
+				end)
+				mapset(modes, "[" .. key:upper(), function()
+					move.goto_previous_end(query)
+				end)
+			end
 
-			mapset({ "n", "x", "o" }, "]r", function()
-				move.goto_next_start({ '@function.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[r", function()
-				move.goto_previous_start({ '@function.outer' })
-			end)
+			-- In diff mode ]c / [c keep their built-in meaning: jump to the next / previous change.
+			for key, jump in pairs({ ["]c"] = move.goto_next_start, ["[c"] = move.goto_previous_start }) do
+				mapset(modes, key, function()
+					if vim.wo.diff then
+						vim.cmd.normal({ vim.v.count1 .. key, bang = true })
+					else
+						jump(targets.c)
+					end
+				end)
+			end
 
-			mapset({ "n", "x", "o" }, "]c", function()
-				move.goto_next_start({ '@class.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[c", function()
-				move.goto_previous_start({ '@class.outer' })
-			end)
-
-			mapset({ "n", "x", "o" }, "]j", function()
-				move.goto_next_start({ '@conditional.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[j", function()
-				move.goto_previous_start({ '@conditional.outer' })
-			end)
-
-			mapset({ "n", "x", "o" }, "]l", function()
-				move.goto_next_start({ '@loop.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[l", function()
-				move.goto_previous_start({ '@loop.outer' })
-			end)
-
-			mapset({ "n", "x", "o" }, "]A", function()
-				move.goto_next_end({ '@parameter.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[A", function()
-				move.goto_previous_end({ '@parameter.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "]F", function()
-				move.goto_next_end({ '@function.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[F", function()
-				move.goto_previous_end({ '@function.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "]R", function()
-				move.goto_next_end({ '@function.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[R", function()
-				move.goto_previous_end({ '@function.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "]C", function()
-				move.goto_next_end({ '@class.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[C", function()
-				move.goto_previous_end({ '@class.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "]J", function()
-				move.goto_next_end({ '@conditional.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[J", function()
-				move.goto_previous_end({ '@conditional.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "]L", function()
-				move.goto_next_end({ '@loop.outer' })
-			end)
-			mapset({ "n", "x", "o" }, "[L", function()
-				move.goto_previous_end({ '@loop.outer' })
-			end)
-
-			-- Select function outer/inner in visual mode
-			local select = require('nvim-treesitter-textobjects.select')
+			local select = require("nvim-treesitter-textobjects.select")
 			mapset({ "x", "o" }, "af", function()
-				select.select_textobject('@function.outer')
+				select.select_textobject("@function.outer")
 			end)
 			mapset({ "x", "o" }, "if", function()
-				select.select_textobject('@function.inner')
+				select.select_textobject("@function.inner")
 			end)
 			mapset({ "x", "o" }, "ac", function()
-				select.select_textobject('@class.outer')
+				select.select_textobject("@class.outer")
 			end)
 			mapset({ "x", "o" }, "ic", function()
-				select.select_textobject('@class.inner')
+				select.select_textobject("@class.inner")
 			end)
 		end,
 	},
 	{
-		'nvim-treesitter/nvim-treesitter-context',
-		dependencies = { 'nvim-treesitter/nvim-treesitter' },
-		event = 'VeryLazy',
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = "VeryLazy",
 		opts = {
-			enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
-			max_lines = 2,   -- How many lines the window should span. Values <= 0 mean no limit.
-			min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-			line_numbers = true,
-			multiline_threshold = 10, -- Maximum number of lines to show for a single context
-			trim_scope = "outer", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-			mode = "topline", -- Line used to calculate context. Choices: 'cursor', 'topline'
-			-- Separator between context and content. Should be a single character string, like '-'.
-			-- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-			separator = nil,
-			zindex = 10, -- The Z-index of the context window
-			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-		}
+			max_lines = 2,
+			multiline_threshold = 10,
+			mode = "topline",
+			zindex = 10,
+		},
 	},
 }
