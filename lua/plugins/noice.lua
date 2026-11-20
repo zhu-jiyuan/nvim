@@ -1,3 +1,8 @@
+local custom = require("custom")
+local border = custom.borders[custom.border]
+-- Hover text starts on the line below the cursor, after the top border when the style has one.
+local has_top = type(border) == "string" or border[2] ~= ""
+
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
@@ -21,8 +26,11 @@ return {
 		cmdline = { enabled = false },
 		messages = { enabled = false },
 		notify = { enabled = false },
-		presets = {
-			lsp_doc_border = true,
+		views = {
+			hover = {
+				border = { style = border },
+				position = { row = has_top and 2 or 1, col = 2 },
+			},
 		},
 	},
 }

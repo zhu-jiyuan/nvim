@@ -1,3 +1,6 @@
+local custom = require("custom")
+local border = custom.borders[custom.border]
+
 return {
 	{
 		'saghen/blink.cmp',
@@ -42,7 +45,7 @@ return {
 				['<C-s>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end },
 				['<C-Enter>'] = { 'show', 'show_documentation', 'hide_documentation' },
 			},
-			signature = { enabled = true },
+			signature = { enabled = true, window = { border = border } },
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -55,6 +58,7 @@ return {
 				documentation = {
 					auto_show = true,
 					auto_show_delay_ms = 500,
+					window = { border = border },
 				},
 				accept = { auto_brackets = { enabled = true } },
 				list = {
@@ -64,6 +68,7 @@ return {
 					},
 				},
 				menu = {
+					border = border,
 					draw = {
 						columns = {
 							{ "label",     "label_description", gap = 1 },

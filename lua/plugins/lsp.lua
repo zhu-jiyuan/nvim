@@ -31,7 +31,7 @@ return {
 				float = {
 					focusable = false,
 					style = "minimal",
-					border = custom.border,
+					border = custom.borders[custom.border],
 					source = true,
 					header = "",
 					prefix = "",
