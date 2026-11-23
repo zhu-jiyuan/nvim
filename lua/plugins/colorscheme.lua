@@ -20,6 +20,7 @@ return {
 					hl.PmenuSbar = { bg = card }
 					hl.PmenuThumb = { bg = pencil }
 					hl.PmenuSel = { fg = palette.fg, bg = "#f8eba6", bold = true }
+					hl.WinSeparator = { fg = pencil }
 					hl.BlinkCmpMenuBorder = { link = "FloatBorder" }
 					hl.BlinkCmpDocBorder = { link = "FloatBorder" }
 					hl.BlinkCmpSignatureHelpBorder = { link = "FloatBorder" }
