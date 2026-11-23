@@ -6,7 +6,7 @@
   "compile-mode.nvim": { "branch": "main", "commit": "cf1c0acca12d54157343ebe0553fb1110a6b2d93" },
   "conform.nvim": { "branch": "master", "commit": "016802de402556da54c36bd7359b441266b01cdd" },
   "copilot-lsp": { "branch": "main", "commit": "1b6d8273594643f51bb4c0c1d819bdb21b42159d" },
-  "copilot.lua": { "branch": "master", "commit": "ba6c1c7e7b2b6b0a93838097bd09c7c83afa30d3" },
+  "copilot.lua": { "branch": "master", "commit": "d1570ddc00fc4fc4caf7422803805ee22cca14ff" },
   "crates.nvim": { "branch": "main", "commit": "7039bc1d130e424232a7aa64ceddb170a154ff5b" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dropbar.nvim": { "branch": "master", "commit": "75df03973f3a06a85300bc8ca1f9f68e935cb78e" },
@@ -52,5 +52,5 @@
   "vim-tmux-navigator": { "branch": "master", "commit": "fb217852efb294a50a10507fc8d53709696b6e23" },
   "visual-whitespace.nvim": { "branch": "main", "commit": "d1f8889dd09ca9b07bc3b7af7cd5d1bfb5a7ea71" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "yazi.nvim": { "branch": "main", "commit": "53f82c55cb3bba29732f12208ad24103931056d0" }
+  "yazi.nvim": { "branch": "main", "commit": "4fef9599c3d4248886d4619dc6e0cb2936682e96" }
 }
